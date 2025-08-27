@@ -67,7 +67,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation(name: 'adgain-sdk-4.2.1.2', ext: 'aar')
-    implementation project(":jiguang:adgain-adapter")
+//    implementation project(":jiguang:adgain-adapter")
+    implementation(name: 'adgain_jiguang_adapter_4.2.1.2', ext: 'aar')
 
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
