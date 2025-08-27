@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 202410151
+        versionName "4.603.1473.10151"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs','../jiguang/libs'
+        }
+    }
+
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (outputFile != null && outputFileName.endsWith('.aar')) {
+                def fileName = "adgain_jiguang_adapter_${extractVersionFromAar()}.aar"
+                outputFileName = fileName
+            }
+        }
+    }
+
+}
+
+
+dependencies {
+    compileOnly "cn.jiguang.sdk.ad:core:3.9.5.10153"
+    compileOnly(name: 'adgain-sdk-4.2.1.2', ext: 'aar')
+
+}
+
+
+def extractVersionFromAar() { // 获取AdGain SDK 版本号
+    def dir = getParent().projectDir.path + "/jiguang/libs/"
+    print('------path ' + dir)
+    def aarFiles = fileTree(dir: dir, include: 'adgain-sdk-*.aar')
+    if (aarFiles.isEmpty()) {
+        return null
+    }
+    def aarFile = aarFiles.first()
+    def matcher = (aarFile.name =~ /adgain-sdk-(\d+\.\d+\.\d+\.\d)\.aar/)
+    if (matcher.find()) {
+        return matcher.group(1) // 返回版本号 4.2.1
+    }
+    def matcher1 = (aarFile.name =~ /adgain-sdk-(\d+\.\d+\.\d+)\.aar/)
+    if (matcher1.find()) {
+        return matcher1.group(1) // 返回版本号 4.2.1
+    }
+    return null
+}

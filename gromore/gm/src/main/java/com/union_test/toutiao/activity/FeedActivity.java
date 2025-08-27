@@ -1,0 +1,42 @@
+package com.union_test.toutiao.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.union_test.toutiao.R;
+
+public class FeedActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_feed);
+        Button button = (Button)findViewById(R.id.btn_FD_back);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        bindButton(R.id.btn_main_feed_lv, FeedListActivity.class);
+        bindButton(R.id.btn_main_feed_rv, FeedRecyclerActivity.class);
+        bindButton(R.id.express_native_ad_list, NativeExpressListActivity.class);
+        bindButton(R.id.express_native_ad_recycler, NativeExpressOnePointFiveRecyclerActivity.class);
+        bindButton(R.id.express_native_ad_onepointfive, NativeExpressOnePointFiveActivity.class);
+        bindButton(R.id.express_native_icon_ad, NativeExpressIconActivity.class);
+    }
+
+    private void bindButton(int id, final Class clz) {
+        findViewById(id).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FeedActivity.this, clz);
+                startActivity(intent);
+            }
+        });
+    }
+}

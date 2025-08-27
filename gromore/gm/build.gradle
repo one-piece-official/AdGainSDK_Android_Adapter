@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+def key = rootProject.ext.keystoreConfig
+def v = rootProject.ext.version
+
+android {
+    compileSdkVersion v.comV
+
+    signingConfigs {
+        sign {
+            keyAlias key.keyAlias
+            keyPassword key.keyPassword
+            storeFile key.storeFile
+            storePassword key.storePassword
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.union_test.toutiao"
+        minSdkVersion v.minV
+        targetSdkVersion v.targetV
+        versionCode 1
+        versionName "4.0.0.0"
+
+        multiDexEnabled true
+
+        ndk {
+            abiFilters 'armeabi', 'arm64-v8a', 'armeabi-v7a'
+        }
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sign
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sign
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    ndkVersion "23.1.7779620"
+}
+
+repositories {
+    flatDir {
+        dirs 'libs', './libs/adn', './libs/adn/mtg', './libs/adn/sigmob', './libs/adapter'
+    }
+    maven { url 'https://artifact.bytedance.com/repository/AwemeOpenSDK' }
+
+}
+
+dependencies {
+
+    implementation(name: "adgain-sdk-4.2.1.2", ext: 'aar')
+//    implementation(name: "adgain_gromore_adapter_4.2.11", ext: 'aar')
+    implementation project(':gromore:adgain-adapter')
+
+    implementation(name: "Baidu_MobAds_SDK_v9.37", ext: 'aar')
+    implementation(name: "mediation_baidu_adapter_9.37.4", ext: 'aar')
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    implementation(name: 'circleimageview-2.2.0', ext: 'aar')
+    implementation(name: 'LayoutManagerGroup', ext: 'aar')
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation "com.android.support:appcompat-v7:28.0.0"
+    implementation "com.android.support:support-annotations:28.0.0"
+    implementation "com.android.support:support-v4:28.0.0"
+    implementation "com.squareup.leakcanary:leakcanary-android-no-op:1.5.4"
+    implementation "com.android.support:recyclerview-v7:28.0.0"
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+
+    //测试工具
+    implementation(name: 'tools-release', ext: 'aar')
+//    implementation(name: 'open_ad_sdk_6.8.1.7', ext: 'aar')
+    implementation(name: 'open_ad_sdk_6.8.1.7', ext: 'aar')
+
+    implementation "com.google.code.gson:gson:2.8.5"
+    implementation "com.bytedance.ies.ugc.aweme:opensdk-china-external:0.1.8.0"
+    implementation "com.bytedance.ies.ugc.aweme:opensdk-common:0.1.8.0"
+
+}

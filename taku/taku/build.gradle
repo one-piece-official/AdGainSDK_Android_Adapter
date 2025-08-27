@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+apply from: 'taku.gradle'
+def key = rootProject.ext.keystoreConfig
+def v = rootProject.ext.version
+
+android {
+    namespace "com.anythink.sdk.demo"
+    compileSdkVersion v.comV
+    defaultConfig {
+        applicationId "com.test.ad.demo"
+        minSdkVersion v.minV
+        targetSdkVersion v.targetV
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled = true
+    }
+    signingConfigs {
+        sign {
+            keyAlias key.keyAlias
+            keyPassword key.keyPassword
+            storeFile key.storeFile
+            storePassword key.storePassword
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.sign
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            signingConfig signingConfigs.sign
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+
+//        sourceCompatibility JavaVersion.VERSION_17
+//        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force 'com.android.support:appcompat-v7:28.0.0'
+            force 'com.android.support:support-v4:28.0.0'
+            force 'com.android.support:design:28.0.0'
+            force 'com.android.support:multidex:1.0.2'
+            // 添加其他 support 库
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+
+    implementation project(':taku:adgain-adapter')
+//    implementation(name: 'adgain_taku_adapter_4.2.1', ext: 'aar')
+
+    implementation(name: 'adgain-sdk-4.2.1.2', ext: 'aar')
+
+    implementation(name: 'anythink_core', ext: 'aar')
+    implementation(name: 'anythink_native', ext: 'aar')
+    implementation(name: 'anythink_interstitial', ext: 'aar')
+    implementation(name: 'anythink_rewardvideo', ext: 'aar')
+    implementation(name: 'anythink_splash', ext: 'aar')
+    implementation(name: 'anythink_banner', ext: 'aar')
+    implementation(name: 'anythink_china_core', ext: 'aar')
+
+    compileOnly 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:multidex:1.0.2'
+
+    /*implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.multidex:multidex:2.0.1'*/
+
+    implementation 'com.github.DingMouRen:LayoutManagerGroup:1e6f4f96eb'
+}

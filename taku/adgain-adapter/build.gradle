@@ -1,0 +1,68 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 34
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 34
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (outputFile != null && outputFileName.endsWith('.aar')) {
+                def fileName = "adgain_taku_adapter_${extractVersionFromAar()}.aar"
+                outputFileName = fileName
+            }
+        }
+    }
+
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    compileOnly(name: 'adgain-sdk-4.2.1.2', ext: 'aar')
+
+    compileOnly(name: 'anythink_core', ext: 'aar')
+    compileOnly(name: 'anythink_native', ext: 'aar')
+    compileOnly(name: 'anythink_interstitial', ext: 'aar')
+    compileOnly(name: 'anythink_rewardvideo', ext: 'aar')
+    compileOnly(name: 'anythink_splash', ext: 'aar')
+    compileOnly(name: 'anythink_banner', ext: 'aar')
+    compileOnly(name: 'anythink_china_core', ext: 'aar')
+}
+
+
+def extractVersionFromAar() { // 获取AdGain SDK 版本号
+    def dir = getParent().projectDir.path + "/taku/libs"
+    def aarFiles = fileTree(dir: dir, include: 'adgain-sdk-*.aar')
+    if (aarFiles.isEmpty()) {
+        return null
+    }
+    def aarFile = aarFiles.first()
+    def matcher = (aarFile.name =~ /adgain-sdk-(\d+\.\d+\.\d+\.\d)\.aar/)
+    if (matcher.find()) {
+        return matcher.group(1) // 返回版本号 4.2.1
+    }
+    def matcher1 = (aarFile.name =~ /adgain-sdk-(\d+\.\d+\.\d+)\.aar/)
+    if (matcher1.find()) {
+        return matcher1.group(1) // 返回版本号 4.2.1
+    }
+    return null
+}
+
+repositories {
+    flatDir {
+        dirs '../taku/libs'
+    }
+}

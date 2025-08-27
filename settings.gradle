@@ -1,0 +1,6 @@
+include 'taku:taku', 'taku:adgain-adapter'
+include 'tobid:tobid', 'tobid:adgain-adapter'
+include 'gromore:gm', 'gromore:adgain-adapter'
+
+include 'jiguang:jiguang', 'jiguang:adgain-adapter'
+
