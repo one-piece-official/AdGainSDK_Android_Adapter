@@ -1,6 +1,9 @@
 
 package com.ad.taku.adgainadapter;
 
+import static com.ad.taku.adgainadapter.AdGainInitManager.getAppId;
+import static com.ad.taku.adgainadapter.AdGainInitManager.getCodeId;
+
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
@@ -48,12 +51,9 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
     @Override
     public void loadCustomNetworkAd(final Context context, final Map<String, Object> serverExtra, Map<String, Object> localExtra) {
 
-        mAppId = ATInitMediation.getStringFromMap(serverExtra, "app_id");
-        codeId = ATInitMediation.getStringFromMap(serverExtra, "slot_id");
-        if (TextUtils.isEmpty(codeId)) {
-            codeId = ATInitMediation.getStringFromMap(serverExtra, "unit_id");
-        }
-        Log.d("------loadAd", "map " + serverExtra);
+        mAppId = getAppId(serverExtra);
+        codeId = getCodeId(serverExtra);
+        Log.d("------loadAd", mAppId + " codeId: " + codeId + " map " + serverExtra);
         mVideoMuted = ATInitMediation.getIntFromMap(serverExtra, "video_muted", 0);
 
         if (TextUtils.isEmpty(mAppId)) {

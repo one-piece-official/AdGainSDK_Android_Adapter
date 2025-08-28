@@ -81,10 +81,7 @@ public class AdGainInitManager extends ATInitMediation {
             mIsIniting.set(true);
         }
 
-        String appId = getStringFromMap(serviceExtras, "app_id");
-        if (TextUtils.isEmpty(appId)) {
-            appId = getStringFromMap(serviceExtras, "appId");
-        }
+        String appId = getAppId(serviceExtras);
         if (onInitCallback != null) {
             mListeners.add(onInitCallback);
         }
@@ -176,5 +173,21 @@ public class AdGainInitManager extends ATInitMediation {
         return ATInitMediation.getIntFromMap(serverExtra, "bid_floor", 0);
     }
 
+
+    public static String getAppId(Map<String, Object> serverExtra) {
+        String mAppId = ATInitMediation.getStringFromMap(serverExtra, "app_id");
+        if (TextUtils.isEmpty(mAppId)) {
+            mAppId = ATInitMediation.getStringFromMap(serverExtra, "appId");
+        }
+        return mAppId;
+    }
+
+    public static String getCodeId(Map<String, Object> serverExtra) {
+        String codeId = ATInitMediation.getStringFromMap(serverExtra, "slot_id");
+        if (TextUtils.isEmpty(codeId)) {
+            codeId = ATInitMediation.getStringFromMap(serverExtra, "unit_id");
+        }
+        return codeId;
+    }
 
 }

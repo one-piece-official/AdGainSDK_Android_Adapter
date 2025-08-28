@@ -1,5 +1,8 @@
 package com.ad.taku.adgainadapter;
 
+import static com.ad.taku.adgainadapter.AdGainInitManager.getAppId;
+import static com.ad.taku.adgainadapter.AdGainInitManager.getCodeId;
+
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
@@ -49,14 +52,9 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
     @Override
     public void loadCustomNetworkAd(final Context context, final Map<String, Object> serverExtra, final Map<String, Object> localExtra) {
 
-        mAppId = ATInitMediation.getStringFromMap(serverExtra, "app_id");
-
-        // 或者取  slot_id 对应topon后台广告位id
-        // "networkUnit": "{\"app_id\":\"1105\",\"slot_id\":\"1194\",\"unit_id\":\"1194\"}",
-        codeId = ATInitMediation.getStringFromMap(serverExtra, "slot_id");
-        if (TextUtils.isEmpty(codeId)) {
-            codeId = ATInitMediation.getStringFromMap(serverExtra, "unit_id");
-        }
+        mAppId = getAppId(serverExtra);
+        codeId = getCodeId(serverExtra);
+        Log.d("------loadAd", mAppId + " codeId: " + codeId + " map " + serverExtra);
 
         isReady = false;
 

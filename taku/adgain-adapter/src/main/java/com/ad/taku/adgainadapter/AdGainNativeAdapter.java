@@ -1,4 +1,8 @@
 package com.ad.taku.adgainadapter;
+
+import static com.ad.taku.adgainadapter.AdGainInitManager.getAppId;
+import static com.ad.taku.adgainadapter.AdGainInitManager.getCodeId;
+
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
@@ -50,13 +54,9 @@ public class AdGainNativeAdapter extends CustomNativeAdapter {
 
     void initRequestParams(Map<String, Object> serverExtra, Map<String, Object> localExtra) {
 
-        mAppId = ATInitMediation.getStringFromMap(serverExtra, "app_id");
-        codeId = ATInitMediation.getStringFromMap(serverExtra, "slot_id");
-        Log.d(TAG, "----native initRequestParams    " + mAppId + "   codeId = " + codeId +" " + serverExtra);
-
-        if (TextUtils.isEmpty(codeId)) {
-            codeId = ATInitMediation.getStringFromMap(serverExtra, "unit_id");
-        }
+        mAppId = getAppId(serverExtra);
+        codeId = getCodeId(serverExtra);
+        Log.d(TAG, "----native initRequestParams    " + mAppId + "   codeId = " + codeId + " " + serverExtra);
 
         mVideoMuted = ATInitMediation.getIntFromMap(serverExtra, "video_muted", 0) == 1;
         mVideoAutoPlay = ATInitMediation.getIntFromMap(serverExtra, "video_autoplay", 1);
