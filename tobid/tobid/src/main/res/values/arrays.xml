@@ -54,6 +54,7 @@
 
     <string-array name="reward_id_value">
         <item>4951363636973134</item> <!-- AdGain 激励广告位ID -->
+
         <item>9387595158051935</item>
         <item>4742225414998032</item>
         <item>7233517458533366</item>
@@ -148,6 +149,8 @@
     </string-array>
 
     <array name="banner_adapter">
+        <item>AdGain</item>
+
         <item>穿山甲</item>
         <item>腾讯广告</item>
         <item>百度</item>
@@ -160,6 +163,8 @@
     </array>
 
     <string-array name="banner_id_value">
+        <item>5815137598221459</item>
+
         <item>7697128192498681</item>
         <item>0572652890771407</item>
         <item>1144613361889830</item>

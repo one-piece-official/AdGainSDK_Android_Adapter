@@ -62,7 +62,7 @@ android {
 
 repositories {
     flatDir {
-        dirs 'libs','libs/AdNetworks/adgainad'
+        dirs 'libs','libs/AdNetworks/adgain'
     }
 }
 
@@ -70,9 +70,10 @@ dependencies {
 
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
 
-//    implementation project(':adgain-adapter')
-    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs/AdNetworks/adgain')
+//    implementation project(':tobid:adgain-adapter')
+      implementation(name: 'adgain_tobid_adapter_4.2.2', ext: 'aar')
 
+    implementation(name: 'adgain-sdk-4.2.2-release', ext: 'aar')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
