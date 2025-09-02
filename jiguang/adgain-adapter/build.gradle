@@ -37,7 +37,7 @@ android {
 
 dependencies {
     compileOnly "cn.jiguang.sdk.ad:core:3.9.5.10153"
-    compileOnly(name: 'adgain-sdk-4.2.1.2', ext: 'aar')
+    compileOnly(name: 'adgain-sdk-4.2.2-release', ext: 'aar')
 
 }
 
