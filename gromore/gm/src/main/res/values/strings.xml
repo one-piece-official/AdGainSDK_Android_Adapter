@@ -112,7 +112,9 @@
 
     <string name="draw_express_media_id" translatable="false">102528069</string>
     <string name="draw_native_media_id" translatable="false">102144891</string>
-    <string name="banner_media_id" translatable="false">945493677</string>
+
+    <string name="banner_media_id" translatable="false">103617928</string>
+
     <string name="banner_bidding_media_id" translatable="false">102070106</string>
 
     <!--<string name="splash_media_id" translatable="false">102117864</string>-->
