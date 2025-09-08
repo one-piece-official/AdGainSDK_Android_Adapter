@@ -20,15 +20,15 @@ public class ADJgDemoConstant {
     /**
      * Banner广告位ID, 640*100
      */
-    public final static String BANNER_AD_POS_ID1 = "db209f15ae0354d17c";
+    public final static String BANNER_AD_POS_ID1 = "ed5537372fbb5d1475";
     /**
      * Banner广告位ID, 600*150
      */
-    public final static String BANNER_AD_POS_ID2 = "098c34f804fd2591e9";
+    public final static String BANNER_AD_POS_ID2 = "ed5537372fbb5d1475";
     /**
      * Banner广告位ID, 600*300
      */
-    public final static String BANNER_AD_POS_ID3 = "8ca4d2887cdc6c37de";
+    public final static String BANNER_AD_POS_ID3 = "ed5537372fbb5d1475";
     public static String BANNER_AD_POS_ID = BANNER_AD_POS_ID1;
 
     /**

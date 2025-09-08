@@ -66,7 +66,7 @@ repositories {
 
 dependencies {
 
-    implementation(name: "adgain-sdk-4.2.2-release", ext: 'aar')
+    implementation(name: "adgain-sdk-4.2.2", ext: 'aar')
 
     implementation(name: "adgain_gromore_adapter_4.2.2", ext: 'aar')
 //    implementation project(':gromore:adgain-adapter')

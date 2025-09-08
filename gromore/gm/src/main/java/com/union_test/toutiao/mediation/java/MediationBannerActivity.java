@@ -11,6 +11,7 @@ import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdDislike;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.gromore.adapter.adgain.GMBiddingUtil;
 import com.union_test.toutiao.R;
 import com.union_test.toutiao.config.TTAdManagerHolder;
 import com.union_test.toutiao.mediation.java.utils.Const;
@@ -148,6 +149,7 @@ public class MediationBannerActivity extends Activity {
 
             public void onAdShow(View view, int i) {
                 Log.d(Const.TAG, "banner showed");
+                GMBiddingUtil.gmNotifyLoss(mBannerAd);
             }
 
             @Override

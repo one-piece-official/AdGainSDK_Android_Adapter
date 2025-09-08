@@ -9,6 +9,8 @@ import com.adgain.sdk.api.AdRequest;
 import com.adgain.sdk.api.BannerAd;
 import com.adgain.sdk.api.BannerAdListener;
 import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.CSJSplashAd;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.bytedance.sdk.openadsdk.mediation.MediationConstant;
 import com.bytedance.sdk.openadsdk.mediation.bridge.custom.banner.MediationCustomBannerLoader;
 import com.bytedance.sdk.openadsdk.mediation.custom.MediationCustomServiceConfig;
@@ -46,9 +48,7 @@ public class AdGainBannerAdapter extends MediationCustomBannerLoader implements 
                     .build();
 
             mBannerAd = new BannerAd(adRequest, this, true, true);
-
-//            GMBiddingUtil.addNotifyBiddingListener(this);
-
+            GMBiddingUtil.addNotifyBiddingListener(this);
             mBannerAd.loadAd();
         } catch (Exception e) {
             callLoadFail(40000, "Exception " + e.getMessage());
@@ -58,6 +58,11 @@ public class AdGainBannerAdapter extends MediationCustomBannerLoader implements 
 
     @Override
     public void notifyBiddingResult(Object object) {
+        Log.d(TAG, "notifyBiddingResult: " + (object instanceof TTNativeExpressAd));
+        if (object instanceof TTNativeExpressAd && mBannerAd != null) {// 有填充才进行竞败回传
+            String ecpm = ((TTNativeExpressAd) object).getMediationManager().getShowEcpm().getEcpm();
+            GMBiddingUtil.adgainNotifyLoss(mBannerAd, ecpm, this);
+        }
     }
 
     public boolean isClientBidding() {
@@ -109,7 +114,7 @@ public class AdGainBannerAdapter extends MediationCustomBannerLoader implements 
     public void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "banner onDestroy");
-//        GMBiddingUtil.removeNotifyBiddingListener(this);
+        GMBiddingUtil.removeNotifyBiddingListener(this);
         if (mBannerAd != null) {
             mBannerAd.destroyAd();
             mBannerAd = null;

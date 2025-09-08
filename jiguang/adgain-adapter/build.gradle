@@ -26,7 +26,8 @@ android {
     libraryVariants.all { variant ->
         variant.outputs.all { output ->
             if (outputFile != null && outputFileName.endsWith('.aar')) {
-                def fileName = "adgain_jiguang_adapter_${extractVersionFromAar()}.aar"
+                def dir = getParent().projectDir.path + "/jiguang/libs/"
+                def fileName = "adgain_jiguang_adapter_${rootProject.extractVersionFromAar(dir)}.aar"
                 outputFileName = fileName
             }
         }
@@ -37,26 +38,6 @@ android {
 
 dependencies {
     compileOnly "cn.jiguang.sdk.ad:core:3.9.5.10153"
-    compileOnly(name: 'adgain-sdk-4.2.2-release', ext: 'aar')
+    compileOnly(name: 'adgain-sdk-4.2.2', ext: 'aar')
 
-}
-
-
-def extractVersionFromAar() { // 获取AdGain SDK 版本号
-    def dir = getParent().projectDir.path + "/jiguang/libs/"
-    print('------path ' + dir)
-    def aarFiles = fileTree(dir: dir, include: 'adgain-sdk-*.aar')
-    if (aarFiles.isEmpty()) {
-        return null
-    }
-    def aarFile = aarFiles.first()
-    def matcher = (aarFile.name =~ /adgain-sdk-(\d+\.\d+\.\d+\.\d)\.aar/)
-    if (matcher.find()) {
-        return matcher.group(1) // 返回版本号 4.2.1
-    }
-    def matcher1 = (aarFile.name =~ /adgain-sdk-(\d+\.\d+\.\d+)\.aar/)
-    if (matcher1.find()) {
-        return matcher1.group(1) // 返回版本号 4.2.1
-    }
-    return null
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
@@ -37,6 +38,8 @@ public class ADJgApplication extends Application {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                Log.d(ADJgDemoConstant.TAG, " onActivityCreated " + activity.getLocalClassName());
+
             }
 
             @Override

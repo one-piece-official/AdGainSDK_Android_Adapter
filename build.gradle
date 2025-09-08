@@ -11,6 +11,28 @@ ext.version = [
         comV:30
 ]
 
+def extractVersionFromAar(dir) { // 获取AdGain SDK 版本号
+//    print('------path ' + dir)
+    def aarFiles = fileTree(dir: dir, include: 'adgain-sdk-*.aar')
+    if (aarFiles.isEmpty()) {
+        return null
+    }
+    def aarFile = aarFiles.first()
+    // 尝试多种匹配模式
+    def patterns = [
+            /adgain-sdk-(\d+\.\d+\.\d+\.\d+)(?:-.*)?\.aar/,  // 4位版本号
+            /adgain-sdk-(\d+\.\d+\.\d+)(?:-.*)?\.aar/,       // 3位版本号
+            /adgain-sdk-(\d+\.\d+)(?:-.*)?\.aar/,            // 2位版本号
+    ]
+    for (pattern in patterns) {
+        def matcher = (aarFile.name =~ pattern)
+        if (matcher.find()) {
+            return matcher.group(1) // 返回纯数字版本号
+        }
+    }
+    return null
+}
+
 buildscript {
 
     repositories {
