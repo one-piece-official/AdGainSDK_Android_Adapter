@@ -25,8 +25,7 @@ android {
     libraryVariants.all { variant ->
         variant.outputs.all { output ->
             if (outputFile != null && outputFileName.endsWith('.aar')) {
-                def dir = getParent().projectDir.path + "/tobid/libs/AdNetworks/adgain"
-                def fileName = "adgain_tobid_adapter_${rootProject.extractVersionFromAar(dir)}.aar"
+                def fileName = "adgain_tobid_adapter_${rootProject.extractVersionFromAar()}.aar"
                 outputFileName = fileName
             }
         }
@@ -34,20 +33,9 @@ android {
 }
 
 dependencies {
-
-    compileOnly(name: "adgain-sdk-4.2.2-release", ext: 'aar')
-
-    // WindMill SDK dependencies
-    compileOnly(name: 'windmill-sdk-4.6.20', ext: 'aar')
-    compileOnly(name: 'wind-common-1.8.3', ext: 'aar')
-    compileOnly(name: 'wind-sdk-4.23.2', ext: 'aar')
-
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../tobid/libs')
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
     compileOnly "com.github.bumptech.glide:glide:4.9.0"
 }
 
 
-repositories {
-    flatDir {
-        dirs '../tobid/libs', '../tobid/libs/AdNetworks/adgain'
-    }
-}

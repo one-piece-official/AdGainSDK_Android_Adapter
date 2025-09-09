@@ -31,8 +31,7 @@ android {
     libraryVariants.all { variant ->
         variant.outputs.all { output ->
             if (outputFile != null && outputFileName.endsWith('.aar')) {
-                def dir = getParent().projectDir.path + "/gm/libs/adn"
-                def fileName = "adgain_gromore_adapter_${rootProject.extractVersionFromAar(dir)}.aar"
+                def fileName = "adgain_gromore_adapter_${rootProject.extractVersionFromAar()}.aar"
                 outputFileName = fileName
             }
         }
@@ -41,15 +40,8 @@ android {
 }
 
 dependencies {
-    compileOnly(name: "adgain-sdk-4.2.2", ext: 'aar')
-
-    compileOnly(name: 'open_ad_sdk_6.8.1.7', ext: 'aar')
-//    compileOnly(name: 'open_ad_sdk_6.6.0.7', ext: 'aar')
-
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../gm/libs/open_ad_sdk_6.8.1.7.aar')
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 }
 
-repositories {
-    flatDir {
-        dirs '../gm/libs','../gm/libs/adn'
-    }
-}
+

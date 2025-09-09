@@ -66,7 +66,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation(name: 'adgain-sdk-4.2.2', ext: 'aar')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 //    implementation project(":jiguang:adgain-adapter")
     implementation(name: 'adgain_jiguang_adapter_4.2.2', ext: 'aar')
 

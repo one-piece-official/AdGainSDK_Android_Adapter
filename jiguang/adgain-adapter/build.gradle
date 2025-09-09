@@ -17,17 +17,10 @@ android {
         }
     }
 
-    repositories {
-        flatDir {
-            dirs 'libs','../jiguang/libs'
-        }
-    }
-
     libraryVariants.all { variant ->
         variant.outputs.all { output ->
             if (outputFile != null && outputFileName.endsWith('.aar')) {
-                def dir = getParent().projectDir.path + "/jiguang/libs/"
-                def fileName = "adgain_jiguang_adapter_${rootProject.extractVersionFromAar(dir)}.aar"
+                def fileName = "adgain_jiguang_adapter_${rootProject.extractVersionFromAar()}.aar"
                 outputFileName = fileName
             }
         }
@@ -38,6 +31,6 @@ android {
 
 dependencies {
     compileOnly "cn.jiguang.sdk.ad:core:3.9.5.10153"
-    compileOnly(name: 'adgain-sdk-4.2.2', ext: 'aar')
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 
 }

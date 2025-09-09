@@ -8,11 +8,12 @@ ext.keystoreConfig = [
 ext.version = [
         minV   : 24,
         targetV: 30,
-        comV:30
+        comV   : 30
 ]
 
-def extractVersionFromAar(dir) { // 获取AdGain SDK 版本号
+def extractVersionFromAar() { // 获取AdGain SDK 版本号
 //    print('------path ' + dir)
+    def dir = rootProject.projectDir.path + "/adgainlibs"
     def aarFiles = fileTree(dir: dir, include: 'adgain-sdk-*.aar')
     if (aarFiles.isEmpty()) {
         return null

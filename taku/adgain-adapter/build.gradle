@@ -19,8 +19,7 @@ android {
     libraryVariants.all { variant ->
         variant.outputs.all { output ->
             if (outputFile != null && outputFileName.endsWith('.aar')) {
-                def dir = getParent().projectDir.path + "/taku/libs"
-                def fileName = "adgain_taku_adapter_${rootProject.extractVersionFromAar(dir)}.aar"
+                def fileName = "adgain_taku_adapter_${rootProject.extractVersionFromAar()}.aar"
                 outputFileName = fileName
             }
         }
@@ -30,21 +29,6 @@ android {
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-
-    compileOnly(name: 'adgain-sdk-4.2.2', ext: 'aar')
-
-    compileOnly(name: 'anythink_core', ext: 'aar')
-    compileOnly(name: 'anythink_native', ext: 'aar')
-    compileOnly(name: 'anythink_interstitial', ext: 'aar')
-    compileOnly(name: 'anythink_rewardvideo', ext: 'aar')
-    compileOnly(name: 'anythink_splash', ext: 'aar')
-    compileOnly(name: 'anythink_banner', ext: 'aar')
-    compileOnly(name: 'anythink_china_core', ext: 'aar')
-}
-
-repositories {
-    flatDir {
-        dirs '../taku/libs'
-    }
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../taku/libs')
 }
