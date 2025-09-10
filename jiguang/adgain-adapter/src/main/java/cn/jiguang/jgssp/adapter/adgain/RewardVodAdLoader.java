@@ -6,11 +6,13 @@ import android.content.Context;
 import com.adgain.sdk.api.AdRequest;
 import com.adgain.sdk.api.RewardAd;
 import com.adgain.sdk.api.RewardAdListener;
+
 import java.util.ArrayList;
 
 import cn.jiguang.jgssp.ad.adapter.bean.ADExtraData;
 import cn.jiguang.jgssp.ad.adapter.loader.ADRewardLoader;
 import cn.jiguang.jgssp.bid.ADSuyiBidLossCode;
+
 public class RewardVodAdLoader extends ADRewardLoader {
 
     private RewardAd mRewardAd;
@@ -89,9 +91,9 @@ public class RewardVodAdLoader extends ADRewardLoader {
             return;
         }
         if (bidCode == ADSuyiBidLossCode.BID_WIN) {
-//            BidPriceUtil.sendWin(rewardVideoAD, hbPriceList);
+            BidPriceUtil.sendWin(mRewardAd, hbPriceList);
         } else {
-//            BidPriceUtil.sendLoss(rewardVideoAD, bidCode, hbPriceList);
+            BidPriceUtil.sendLoss(mRewardAd, bidCode, hbPriceList);
         }
     }
 

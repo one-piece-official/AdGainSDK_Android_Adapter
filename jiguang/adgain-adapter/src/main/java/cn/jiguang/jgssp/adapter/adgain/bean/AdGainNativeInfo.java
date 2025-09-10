@@ -17,6 +17,7 @@ import java.util.List;
 import cn.jiguang.jgssp.ad.adapter.bean.ADNativeInfo;
 import cn.jiguang.jgssp.ad.entity.ADJgActionType;
 import cn.jiguang.jgssp.ad.entity.ADJgAppInfo;
+import cn.jiguang.jgssp.adapter.adgain.BidPriceUtil;
 import cn.jiguang.jgssp.bid.ADSuyiBidLossCode;
 
 public class AdGainNativeInfo extends ADNativeInfo<NativeAdData> {
@@ -146,9 +147,9 @@ public class AdGainNativeInfo extends ADNativeInfo<NativeAdData> {
     @Override
     public void adapterBiddingResult(int bidCode, ArrayList<Double> hbPriceList) {
         if (bidCode == ADSuyiBidLossCode.BID_WIN) {
-//            BidPriceUtil.sendWin(getAdInfo(), hbPriceList);
+            BidPriceUtil.sendWin(getAdInfo(), hbPriceList);
         } else {
-//            BidPriceUtil.sendLoss(getAdInfo(), bidCode, hbPriceList);
+            BidPriceUtil.sendLoss(getAdInfo(), bidCode, hbPriceList);
         }
     }
 }

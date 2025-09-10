@@ -64,10 +64,6 @@ public class SplashAdLoader extends ADSplashLoader {
 
             @Override
             public void onSplashAdClose(boolean b) {
-             /*   if (b) {
-                    callSkip();
-                } else {
-                }*/
                 callClose();
             }
         }, 5 * 1000);
@@ -93,9 +89,9 @@ public class SplashAdLoader extends ADSplashLoader {
             return;
         }
         if (bidCode == ADSuyiBidLossCode.BID_WIN) {
-//            BidPriceUtil.sendWin(splashAd, hbPriceList);
+            BidPriceUtil.sendWin(splashAd, hbPriceList);
         } else {
-//            BidPriceUtil.sendLoss(splashAd, bidCode, hbPriceList);
+            BidPriceUtil.sendLoss(splashAd, bidCode, hbPriceList);
         }
     }
 

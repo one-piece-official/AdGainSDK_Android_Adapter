@@ -10,7 +10,9 @@ import com.adgain.sdk.api.NativeAdEventListener;
 import java.util.ArrayList;
 
 import cn.jiguang.jgssp.ad.adapter.bean.ADNativeExpressInfo;
+import cn.jiguang.jgssp.adapter.adgain.BidPriceUtil;
 import cn.jiguang.jgssp.bid.ADSuyiBidLossCode;
+
 public class AdGainNativeExpressInfo extends ADNativeExpressInfo<NativeAdData> {
 
     public AdGainNativeExpressInfo(NativeAdData adInfo) {
@@ -77,9 +79,9 @@ public class AdGainNativeExpressInfo extends ADNativeExpressInfo<NativeAdData> {
     @Override
     public void adapterBiddingResult(int bidCode, ArrayList<Double> hbPriceList) {
         if (bidCode == ADSuyiBidLossCode.BID_WIN) {
-//            BidPriceUtil.sendWin(getAdInfo(), hbPriceList);
+            BidPriceUtil.sendWin(getAdInfo(), hbPriceList);
         } else {
-//            BidPriceUtil.sendLoss(getAdInfo(), bidCode, hbPriceList);
+            BidPriceUtil.sendLoss(getAdInfo(), bidCode, hbPriceList);
         }
     }
 }

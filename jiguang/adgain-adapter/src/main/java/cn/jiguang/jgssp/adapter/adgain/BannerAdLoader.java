@@ -10,8 +10,11 @@ import com.adgain.sdk.api.AdRequest;
 import com.adgain.sdk.api.BannerAd;
 import com.adgain.sdk.api.BannerAdListener;
 
+import java.util.ArrayList;
+
 import cn.jiguang.jgssp.ad.adapter.bean.ADExtraData;
 import cn.jiguang.jgssp.ad.adapter.loader.ADBannerLoader;
+import cn.jiguang.jgssp.bid.ADSuyiBidLossCode;
 
 /**
  * @author maipian
@@ -25,16 +28,13 @@ public class BannerAdLoader extends ADBannerLoader {
     @Override
     public void adapterLoadAd(Context context, String positionId, ADExtraData adExtraData) {
 
-        AdRequest adRequest = new AdRequest.Builder()
-                .setCodeId(positionId)
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().setCodeId(positionId).build();
 
         mBannerAd = new BannerAd(adRequest, new BannerAdListener() {
             @Override
             public void onBannerAdLoadSuccess() {
                 if (isBid()) {
-                    if (mBannerAd != null)
-                        callSuccess(mBannerAd.getBidPrice());
+                    if (mBannerAd != null) callSuccess(mBannerAd.getBidPrice());
                 } else {
                     callSuccess();
                 }
@@ -76,6 +76,18 @@ public class BannerAdLoader extends ADBannerLoader {
     public void adapterShow(ViewGroup container) {
         if (mBannerAd != null) {
             container.addView(mBannerAd.getBannerView());
+        }
+    }
+
+    @Override
+    public void adapterBiddingResult(int bidCode, ArrayList<Double> hbPriceList) {
+        if (mBannerAd == null) {
+            return;
+        }
+        if (bidCode == ADSuyiBidLossCode.BID_WIN) {
+            BidPriceUtil.sendWin(mBannerAd, hbPriceList);
+        } else {
+            BidPriceUtil.sendLoss(mBannerAd, bidCode, hbPriceList);
         }
     }
 

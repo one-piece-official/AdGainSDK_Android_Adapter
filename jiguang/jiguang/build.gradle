@@ -68,8 +68,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 //    implementation project(":jiguang:adgain-adapter")
-    implementation(name: 'adgain_jiguang_adapter_4.2.2', ext: 'aar')
-
+    implementation(name: 'adgain_jiguang_adapter_4.2.2.1', ext: 'aar')
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:multidex:1.0.3'

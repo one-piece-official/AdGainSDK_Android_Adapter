@@ -75,9 +75,9 @@ public class InterstitialAdLoader extends ADInterstitialLoader {
             return;
         }
         if (bidCode == ADSuyiBidLossCode.BID_WIN) {
-//            BidPriceUtil.sendWin(unifiedInterstitialAD, hbPriceList);
+            BidPriceUtil.sendWin(mInterstitialAd, hbPriceList);
         } else {
-//            BidPriceUtil.sendLoss(unifiedInterstitialAD, bidCode, hbPriceList);
+            BidPriceUtil.sendLoss(mInterstitialAd, bidCode, hbPriceList);
         }
     }
 
