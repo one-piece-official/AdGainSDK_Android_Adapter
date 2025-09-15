@@ -31,6 +31,9 @@ import com.windmill.sdk.splash.WMSplashEyeAdListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 主页打开的开屏，有load 和 show 按钮
+ **/
 public class SplashAdActivity extends Activity implements AdapterView.OnItemSelectedListener {
     private Spinner spinner;
     private ArrayAdapter<String> arrayAdapter;
@@ -154,10 +157,15 @@ public class SplashAdActivity extends Activity implements AdapterView.OnItemSele
 
         WMSplashAdRequest adRequest = new WMSplashAdRequest(placementId, String.valueOf(0), null);
         splashAd = new WMSplashAd(this, adRequest, new WMSplashAdListener() {
-            @Override
+            //            @Override
             public void onSplashAdSuccessPresent(AdInfo adInfo) {
                 logCallBack("onSplashAdSuccessPresent", "");
             }
+
+            public void onSplashAdFailToPresent(WindMillError error, String placementId) {
+
+            }
+
 
             @Override
             public void onSplashAdSuccessLoad(String placementId) {
@@ -191,6 +199,8 @@ public class SplashAdActivity extends Activity implements AdapterView.OnItemSele
                 //展示点睛广告
                 showSplashEyeAd(splashEyeAd);
             }
+
+
         });
 
         splashAd.loadAdOnly();

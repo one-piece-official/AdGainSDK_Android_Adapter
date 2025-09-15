@@ -1,4 +1,3 @@
-
 package com.ad.taku.adgainadapter;
 
 
@@ -21,7 +20,6 @@ import com.anythink.core.api.ATInitMediation;
 import com.anythink.core.api.MediationInitCallback;
 import com.anythink.interstitial.unitgroup.api.CustomInterstitialAdapter;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -48,6 +46,7 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
 
         return true;
     }
+
     @Override
     public void loadCustomNetworkAd(final Context context, final Map<String, Object> serverExtra, final Map<String, Object> localExtra) {
 
@@ -74,10 +73,7 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
     }
 
     private void loadInterstitial(Map<String, Object> serverExtra, Map<String, Object> localExtra) {
-        AdRequest adRequest = new AdRequest.Builder()
-                .setCodeId(codeId)
-                .setBidFloor(AdGainInitManager.getBidFloor(serverExtra))
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId).setBidFloor(AdGainInitManager.getBidFloor(serverExtra)).build();
 
         mGTInterstitialAd = new InterstitialAd(adRequest, new InterstitialAdListener() {
 
@@ -88,24 +84,18 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
 
             @Override
             public void onInterstitialAdLoadSuccess() {
-                if (isC2SBidding) {
-
-                    if (mBiddingListener != null) {
-                        int ecpm = mGTInterstitialAd.getBidPrice();
-
-                        AdGainBiddingNotice biddingNotice = new AdGainBiddingNotice(mGTInterstitialAd);
-
-                        mBiddingListener.onC2SBiddingResultWithCache(ATBiddingResult.success(ecpm, System.currentTimeMillis() + "", biddingNotice, ATAdConst.CURRENCY.RMB_CENT), null);
-                    }
-
-                } else if (mLoadListener != null) {
+                if (mLoadListener != null) {
                     mLoadListener.onAdDataLoaded();
                 }
             }
 
             @Override
             public void onInterstitialAdLoadCached() {
-                if (mLoadListener != null) {
+                if (isC2SBidding) {
+                    if (mBiddingListener != null) {
+                        mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mGTInterstitialAd), null);
+                    }
+                } else if (mLoadListener != null) {
                     mLoadListener.onAdCacheLoaded();
                 }
             }

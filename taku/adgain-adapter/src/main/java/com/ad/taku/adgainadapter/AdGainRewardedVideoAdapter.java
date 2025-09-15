@@ -84,24 +84,19 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
         mRewardVideoAD = new RewardAd(adRequest, new RewardAdListener() {
             @Override
             public void onRewardAdLoadSuccess() {
-                if (isC2SBidding) {
-
-                    if (mBiddingListener != null) {
-                        int ecpm = mRewardVideoAD.getBidPrice();
-
-                        AdGainBiddingNotice biddingNotice = new AdGainBiddingNotice(mRewardVideoAD);
-
-                        mBiddingListener.onC2SBiddingResultWithCache(ATBiddingResult.success(ecpm, System.currentTimeMillis() + "", biddingNotice, ATAdConst.CURRENCY.RMB_CENT), null);
-                    }
-
-                } else if (mLoadListener != null) {
+                Log.d(TAG, "onRewardAdLoadSuccess");
+                if (mLoadListener != null)
                     mLoadListener.onAdDataLoaded();
-                }
             }
 
             @Override
             public void onRewardAdLoadCached() {
-                if (mLoadListener != null) {
+                Log.d(TAG, "onRewardAdLoadCached");
+                if (isC2SBidding) {
+                    if (mBiddingListener != null) {
+                        mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mRewardVideoAD), null);
+                    }
+                } else if (mLoadListener != null) {
                     mLoadListener.onAdCacheLoaded();
                 }
             }
@@ -185,6 +180,7 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
 
     @Override
     public boolean isAdReady() {
+        Log.d(TAG, "isAdReady " + mRewardVideoAD.isReady());
         if (mRewardVideoAD != null) {
             return mRewardVideoAD.isReady();
         }

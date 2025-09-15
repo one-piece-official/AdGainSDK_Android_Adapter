@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AdGainInitManager extends ATInitMediation {
 
-    public static final String TAG = "AdGainAdapter";
+    public static final String TAG = "---AdGainAdapter";
 
     private volatile static AdGainInitManager sInstance;
 

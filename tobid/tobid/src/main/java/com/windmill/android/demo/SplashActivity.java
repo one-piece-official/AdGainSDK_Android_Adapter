@@ -30,6 +30,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * 启动页开屏
+ * **/
 public class SplashActivity extends Activity {
     /**
      * 设置一个变量来控制当前开屏页面是否可以跳转，当开屏广告为普链类广告时，点击会打开一个广告落地页，此时开发者还不能打开自己的App主页。当从广告落地页返回以后，

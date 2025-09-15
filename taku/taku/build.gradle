@@ -67,9 +67,9 @@ repositories {
 dependencies {
 
 //    implementation project(':taku:adgain-adapter')
-    implementation(name: 'adgain_taku_adapter_4.2.2', ext: 'aar')
+    implementation(name: 'adgain_taku_adapter_4.2.2.1', ext: 'aar')
 
-    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 
     implementation(name: 'anythink_core', ext: 'aar')
     implementation(name: 'anythink_native', ext: 'aar')

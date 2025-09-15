@@ -21,7 +21,6 @@ import com.anythink.nativead.unitgroup.api.CustomNativeAd;
 import com.anythink.nativead.unitgroup.api.CustomNativeAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -122,11 +121,11 @@ public class AdGainNativeAdapter extends CustomNativeAdapter {
 
                             AdGainNativeAd gdtNativeAd = new AdGainNativeAd(context, unifiedADData, mVideoMuted, mVideoAutoPlay, mVideoDuration);
 
-                            AdGainBiddingNotice notice = new AdGainBiddingNotice(nativeAd);
+                            BiddingNotice notice = new BiddingNotice(nativeAd);
 
                             Log.d(TAG, "onAdLoad: onC2SBiddingResultWithCache price = " + price);
 
-                            mBiddingListener.onC2SBiddingResultWithCache(ATBiddingResult.success(price, System.currentTimeMillis() + "", notice, ATAdConst.CURRENCY.RMB_CENT), gdtNativeAd);
+                            mBiddingListener.onC2SBidResult(ATBiddingResult.success(price, System.currentTimeMillis() + "", notice, ATAdConst.CURRENCY.RMB_CENT));
                         }
 
                         return;

@@ -1,6 +1,7 @@
 package com.tobid.adapter.adgain;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
@@ -21,20 +22,10 @@ public class AdGainCustomerBanner extends WMCustomBannerAdapter implements Banne
 
     BannerAd mBannerAd;
 
-    @Override
     public void loadAd(Activity activity, Map<String, Object> localExtra, Map<String, Object> serverExtra) {
-        Log.d(TAG, "loadAd: l: " + localExtra + " s: " + serverExtra + "  " + AdGainAdapterUtil.getBidFloor(this, serverExtra));
-
         try {
-            String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
-
-            AdRequest adRequest = new AdRequest.Builder()
-                    .setCodeId(codeId)
-                    .build();
-
-            mBannerAd = new BannerAd(adRequest, this, true, true);
-
-            mBannerAd.loadAd();
+            Log.d(TAG, "loadAd: l: " + localExtra + " s: " + serverExtra + "  " + AdGainAdapterUtil.getBidFloor(this, serverExtra));
+            loadAd(activity.getApplicationContext(), localExtra, serverExtra);
         } catch (Exception tr) {
             Log.e(TAG, "loadAd exception: ", tr);
             callLoadFail(new WMAdapterError(WindMillError.ERROR_AD_ADAPTER_LOAD.getErrorCode(),
@@ -58,6 +49,22 @@ public class AdGainCustomerBanner extends WMCustomBannerAdapter implements Banne
         }
 
 
+    }
+
+    public void loadAd(Context context, Map<String, Object> localExtra, Map<String, Object> serverExtra) {
+        Log.d(TAG, "loadAd: l: " + localExtra + " s: " + serverExtra + "  " + AdGainAdapterUtil.getBidFloor(this, serverExtra));
+        try {
+            String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
+            AdRequest adRequest = new AdRequest.Builder()
+                    .setCodeId(codeId)
+                    .build();
+            mBannerAd = new BannerAd(adRequest, this, true, true);
+            mBannerAd.loadAd();
+        } catch (Exception tr) {
+            Log.e(TAG, "loadAd exception: ", tr);
+            callLoadFail(new WMAdapterError(WindMillError.ERROR_AD_ADAPTER_LOAD.getErrorCode(),
+                    "catch AdGain loadAd error " + Log.getStackTraceString(tr)));
+        }
     }
 
     @Override

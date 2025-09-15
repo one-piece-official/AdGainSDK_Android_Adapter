@@ -1,6 +1,7 @@
-
 package com.ad.taku.adgainadapter;
 
+import static com.ad.taku.adgainadapter.AdGainInitManager.getAppId;
+import static com.ad.taku.adgainadapter.AdGainInitManager.getCodeId;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -12,22 +13,16 @@ import com.adgain.sdk.api.AdRequest;
 import com.adgain.sdk.api.BannerAd;
 import com.adgain.sdk.api.BannerAdListener;
 import com.anythink.banner.unitgroup.api.CustomBannerAdapter;
-import com.anythink.core.api.ATAdConst;
 import com.anythink.core.api.ATBiddingListener;
-import com.anythink.core.api.ATBiddingResult;
-import com.anythink.core.api.ATInitMediation;
 import com.anythink.core.api.MediationInitCallback;
 
 import java.util.Map;
 
-
 public class AdGainBannerAdapter extends CustomBannerAdapter implements BannerAdListener {
     public static String TAG = AdGainInitManager.TAG;
-
-    BannerAd mBannerAd;
-
-    String mAppId;
-    String codeId;
+    private BannerAd mBannerAd;
+    private String mAppId;
+    private String codeId;
 
     @Override
     public boolean startBiddingRequest(Context context, Map<String, Object> serverExtra, Map<String, Object> localExtra, ATBiddingListener biddingListener) {
@@ -40,14 +35,8 @@ public class AdGainBannerAdapter extends CustomBannerAdapter implements BannerAd
 
     @Override
     public void loadCustomNetworkAd(Context context, Map<String, Object> serverExtra, Map<String, Object> localExtra) {
-
-
-        mAppId = ATInitMediation.getStringFromMap(serverExtra, "app_id");
-        codeId = ATInitMediation.getStringFromMap(serverExtra, "slot_id");
-        if (TextUtils.isEmpty(codeId)) {
-            codeId = ATInitMediation.getStringFromMap(serverExtra, "unit_id");
-        }
-
+        mAppId = getAppId(serverExtra);
+        codeId = getCodeId(serverExtra);
         Log.d(TAG, "loadCustomNetworkAd: mAppId = " + mAppId + "  mADUnitId = " + codeId);
 
         if (TextUtils.isEmpty(mAppId)) {
@@ -71,9 +60,7 @@ public class AdGainBannerAdapter extends CustomBannerAdapter implements BannerAd
     private void loadAd() {
         Log.d(TAG, "banner  loadAd ");
 
-        AdRequest adRequest = new AdRequest.Builder()
-                .setCodeId(codeId)
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId).build();
 
         mBannerAd = new BannerAd(adRequest, this, true, true);
 
@@ -125,13 +112,10 @@ public class AdGainBannerAdapter extends CustomBannerAdapter implements BannerAd
     @Override
     public void onBannerAdLoadSuccess() {
         Log.d(TAG, "banner  onBannerAdLoadSuccess ");
-
         if (mBiddingListener != null) {
-            int ecpm = mBannerAd.getBidPrice();
-
-            AdGainBiddingNotice biddingNotice = new AdGainBiddingNotice(mBannerAd);
-
-            mBiddingListener.onC2SBiddingResultWithCache(ATBiddingResult.success(ecpm, System.currentTimeMillis() + "", biddingNotice, ATAdConst.CURRENCY.RMB_CENT), null);
+            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mBannerAd), null);
+        } else if (mLoadListener != null) {
+            mLoadListener.onAdCacheLoaded();
         }
     }
 

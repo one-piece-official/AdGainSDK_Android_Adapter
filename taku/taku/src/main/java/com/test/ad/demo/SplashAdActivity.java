@@ -173,7 +173,7 @@ public class SplashAdActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void onAdLoaded(boolean isTimeout) {
             Log.i(TAG, "onAdLoaded---------isTimeout:" + isTimeout);
-            printLogOnUI("onAdLoaded---------isTimeout:" + isTimeout);
+            printLogOnUI("onAdLoaded----" );
         }
 
         @Override

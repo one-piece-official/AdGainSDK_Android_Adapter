@@ -169,3 +169,8 @@ public static final ** CREATOR;
 -keep class com.tapsdk.** {*; }
 -keep class com.tapadn.** {*; }
 
+
+# Adgain混淆
+-dontwarn com.adgain.sdk.**
+-keep class com.adgain.sdk.** {*;}
+-keep interface com.adgain.**{ *;}

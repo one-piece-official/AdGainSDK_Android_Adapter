@@ -9,18 +9,18 @@ import com.adgain.sdk.api.RewardAd;
 import com.adgain.sdk.api.SplashAd;
 import com.anythink.core.api.ATAdConst;
 import com.anythink.core.api.ATBiddingNotice;
-import com.anythink.core.api.ATInitMediation;
+import com.anythink.core.api.ATBiddingResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdGainBiddingNotice implements ATBiddingNotice {
+public class BiddingNotice implements ATBiddingNotice {
 
     private static final String TAG = AdGainInitManager.TAG;
 
     IBidding gtBaseAd;
 
-    protected AdGainBiddingNotice(IBidding adObject) {
+    protected BiddingNotice(IBidding adObject) {
         this.gtBaseAd = adObject;
     }
 
@@ -85,6 +85,11 @@ public class AdGainBiddingNotice implements ATBiddingNotice {
         }
 
         return gtBaseAd != null ? gtBaseAd.toString() : "";
+    }
+
+    public static ATBiddingResult biddingResult(com.adgain.sdk.x bidding) {
+        BiddingNotice biddingNotice = new BiddingNotice(bidding);
+        return ATBiddingResult.success(bidding.getBidPrice(), System.currentTimeMillis() + "", biddingNotice, ATAdConst.CURRENCY.RMB_CENT);
     }
 
 }

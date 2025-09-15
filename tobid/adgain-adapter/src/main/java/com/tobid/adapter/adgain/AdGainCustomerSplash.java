@@ -1,6 +1,7 @@
 package com.tobid.adapter.adgain;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.ViewGroup;
 
@@ -13,6 +14,7 @@ import com.windmill.sdk.WindMillError;
 import com.windmill.sdk.base.WMAdapterError;
 import com.windmill.sdk.custom.WMCustomSplashAdapter;
 import com.windmill.sdk.models.BidPrice;
+
 import java.util.Map;
 
 public class AdGainCustomerSplash extends WMCustomSplashAdapter implements SplashAdListener {
@@ -20,15 +22,20 @@ public class AdGainCustomerSplash extends WMCustomSplashAdapter implements Splas
     private static final String TAG = "AdGainCustomerSplash";
     private SplashAd splashAd;
 
-
-    @Override
     public void loadAd(Activity activity, ViewGroup viewGroup, Map<String, Object> localExtra, Map<String, Object> serverExtra) {
+        try {
+            loadAd(activity.getApplicationContext(), viewGroup, localExtra, serverExtra);
+        } catch (Exception e) {
+        }
+    }
+
+    public void loadAd(Context context, ViewGroup viewGroup, Map<String, Object> localExtra, Map<String, Object> serverExtra) {
         Log.d(TAG, "loadAd: l: " + localExtra + " s:" + serverExtra);
         try {
             // 这个数值来自sigmob后台广告位ID的配置
             String unitId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
-            int w = activity.getApplicationContext().getResources().getDisplayMetrics().widthPixels;
-            int h = activity.getApplicationContext().getResources().getDisplayMetrics().heightPixels;
+            int w = context.getApplicationContext().getResources().getDisplayMetrics().widthPixels;
+            int h = context.getApplicationContext().getResources().getDisplayMetrics().heightPixels;
             AdRequest adRequest = new AdRequest.Builder().setCodeId(unitId)
                     .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra))
                     .setWidth(w).setHeight(h).build();

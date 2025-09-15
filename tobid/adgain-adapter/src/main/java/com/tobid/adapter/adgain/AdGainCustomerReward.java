@@ -1,6 +1,7 @@
 package com.tobid.adapter.adgain;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import com.adgain.sdk.api.AdError;
@@ -21,16 +22,25 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
 
     private RewardAd rewardAd;
 
-    @Override
     public void loadAd(Activity activity, Map<String, Object> localExtra, Map<String, Object> serverExtra) {
-        Log.d(TAG, "loadAd: l: " + localExtra + " s: " + serverExtra + "  " + AdGainAdapterUtil.getBidFloor(this,serverExtra));
+        try {
+            Log.d(TAG, "loadAd: l: " + localExtra + " s: " + serverExtra + "  " + AdGainAdapterUtil.getBidFloor(this, serverExtra));
+            loadAd(activity.getApplicationContext(), localExtra, serverExtra);
+        } catch (Throwable e) {
+            callLoadFail(new WMAdapterError(WindMillError.ERROR_AD_ADAPTER_LOAD.getErrorCode(),
+                    "catch GtAd loadAd error " + Log.getStackTraceString(e)));
+        }
+
+    }
+
+    public void loadAd(Context context, Map<String, Object> localExtra, Map<String, Object> serverExtra) {
         try {
             // 这个数值来自sigmob后台广告位ID的配置
             String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(codeId)
                     .setExtOption(localExtra)
-                    .setBidFloor(AdGainAdapterUtil.getBidFloor(this,serverExtra))
+                    .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra))
                     .build();
             rewardAd = new RewardAd(adRequest, this);
             rewardAd.loadAd();
