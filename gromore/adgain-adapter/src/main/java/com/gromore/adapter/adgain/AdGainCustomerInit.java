@@ -41,6 +41,13 @@ public class AdGainCustomerInit extends MediationCustomInitLoader {
                         public String getOaid() {
                             return ""; // 传信通院ID
                         }
+
+                        @Override
+                        public boolean canReadLocation() {
+                            return false;
+                        }
+
+
                     })
                     .setInitCallback(new InitCallback() {
                         // 初始化成功回调，初始化成功后才可以加载广告

@@ -45,18 +45,17 @@ public class AdGainInterAdapter extends MediationCustomInterstitialLoader implem
 
                 @Override
                 public void onInterstitialAdLoadSuccess() {
-                    Log.d(TAG, "onInterstitialAdLoadSuccess: " + isClientBidding() + " codeId: " + adSlot.getCodeId() + " slotId: " + serviceConfig.getADNNetworkSlotId());
-                    if (isClientBidding())
-                        callLoadSuccess(mInterstitialAd.getBidPrice());  // 单位 分 ecpm
-
+//                    Log.d(TAG, "onInterstitialAdLoadSuccess: " + isClientBidding() + " codeId: " + adSlot.getCodeId() + " slotId: " + serviceConfig.getADNNetworkSlotId());
                 }
 
                 @Override
                 public void onInterstitialAdLoadCached() {
                     Log.d(TAG, "onInterstitialAdLoadCached: ");
-                    if (!isClientBidding()){
+                    if (!isClientBidding())
                         callLoadSuccess();
-                    }
+                    else
+                        callLoadSuccess(mInterstitialAd != null ? mInterstitialAd.getBidPrice() : 0);  // 单位 分 ecpm
+
                 }
 
                 @Override

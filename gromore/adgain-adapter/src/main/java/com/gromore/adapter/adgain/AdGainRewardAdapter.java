@@ -52,8 +52,6 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
                 @Override
                 public void onRewardAdLoadSuccess() {
                     Log.d(TAG, "reward AdLoadSuccess: " + isClientBidding());
-                    if (isClientBidding())
-                        callLoadSuccess(mRewardAd.getBidPrice());  // 单位 分
                 }
 
                 @Override
@@ -61,6 +59,8 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
                     Log.d(TAG, "onRewardAdLoadCached: " + getBiddingType());
                     if (!isClientBidding())
                         callAdVideoCache();
+                    else
+                        callLoadSuccess(mRewardAd != null ? mRewardAd.getBidPrice() : 0);  // 单位 分
                 }
 
                 @Override
@@ -176,9 +176,7 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
 
     @Override
     public MediationConstant.AdIsReadyStatus isReadyCondition() {
-        return mRewardAd != null && mRewardAd.isReady() ?
-                MediationConstant.AdIsReadyStatus.AD_IS_READY
-                : MediationConstant.AdIsReadyStatus.AD_IS_NOT_READY;
+        return mRewardAd != null && mRewardAd.isReady() ? MediationConstant.AdIsReadyStatus.AD_IS_READY : MediationConstant.AdIsReadyStatus.AD_IS_NOT_READY;
     }
 
     public boolean isClientBidding() {
