@@ -73,7 +73,9 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
     }
 
     private void loadInterstitial(Map<String, Object> serverExtra, Map<String, Object> localExtra) {
-        AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId).setBidFloor(AdGainInitManager.getBidFloor(serverExtra)).build();
+        AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId)
+                .setAppId(mAppId)
+                .setBidFloor(AdGainInitManager.getBidFloor(serverExtra)).build();
 
         mGTInterstitialAd = new InterstitialAd(adRequest, new InterstitialAdListener() {
 

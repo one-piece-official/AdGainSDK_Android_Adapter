@@ -2,6 +2,7 @@ package com.tobid.adapter.adgain;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.adgain.sdk.api.AdError;
@@ -37,9 +38,11 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
         try {
             // 这个数值来自sigmob后台广告位ID的配置
             String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
+            String appId = (String) serverExtra.get(WMConstants.APP_ID);
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(codeId)
                     .setExtOption(localExtra)
+                    .setAppId(appId)
                     .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra))
                     .build();
             rewardAd = new RewardAd(adRequest, this);

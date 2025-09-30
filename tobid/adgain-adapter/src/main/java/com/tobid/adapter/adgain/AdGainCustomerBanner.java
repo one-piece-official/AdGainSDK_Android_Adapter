@@ -47,16 +47,16 @@ public class AdGainCustomerBanner extends WMCustomBannerAdapter implements Banne
         if (mBannerAd != null) {
             mBannerAd.destroyAd();
         }
-
-
     }
 
     public void loadAd(Context context, Map<String, Object> localExtra, Map<String, Object> serverExtra) {
         Log.d(TAG, "loadAd: l: " + localExtra + " s: " + serverExtra + "  " + AdGainAdapterUtil.getBidFloor(this, serverExtra));
         try {
             String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
+            String appId = (String) serverExtra.get(WMConstants.APP_ID);
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(codeId)
+                    .setAppId(appId)
                     .build();
             mBannerAd = new BannerAd(adRequest, this, true, true);
             mBannerAd.loadAd();

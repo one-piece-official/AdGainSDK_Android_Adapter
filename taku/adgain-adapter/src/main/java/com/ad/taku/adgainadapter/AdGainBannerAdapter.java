@@ -60,7 +60,9 @@ public class AdGainBannerAdapter extends CustomBannerAdapter implements BannerAd
     private void loadAd() {
         Log.d(TAG, "banner  loadAd ");
 
-        AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId).build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .setAppId(mAppId)
+                .setCodeId(codeId).build();
 
         mBannerAd = new BannerAd(adRequest, this, true, true);
 

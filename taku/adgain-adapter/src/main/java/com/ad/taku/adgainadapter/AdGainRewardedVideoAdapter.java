@@ -78,6 +78,7 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
 
         AdRequest adRequest = new AdRequest.Builder()
                 .setCodeId(codeId)
+                .setAppId(mAppId)
                 .setBidFloor(AdGainInitManager.getBidFloor(serverExtra))
                 .build();
 

@@ -67,7 +67,7 @@ repositories {
 dependencies {
 
 //    implementation project(':taku:adgain-adapter')
-    implementation(name: 'adgain_taku_adapter_4.2.2.1', ext: 'aar')
+    implementation(name: 'adgain_taku_adapter_4.2.3', ext: 'aar')
 
     implementation fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 

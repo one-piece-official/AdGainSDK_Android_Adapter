@@ -73,7 +73,9 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
     }
 
     private void startLoadAd(final Context context, Map<String, Object> serverExtra) {
-        AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId).setBidFloor(AdGainInitManager.getBidFloor(serverExtra)).build();
+        AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId)
+                .setAppId(mAppId)
+                .setBidFloor(AdGainInitManager.getBidFloor(serverExtra)).build();
         splashAD = new SplashAd(adRequest, new SplashAdListener() {
             @Override
             public void onAdLoadSuccess() {

@@ -25,11 +25,12 @@ public class AdGainCustomerInit extends MediationCustomInitLoader {
     public String getNetworkSdkVersion() {
         return AdGainSdk.getVersionName();
     }
+
     @Override
     public void initializeADN(Context context, MediationCustomInitConfig mediationCustomInitConfig, Map<String, Object> map) {
         try {
             Map<String, Object> customData = new HashMap<>();
-            customData.put("thirdMediation","gm");
+            customData.put("thirdMediation", "gm");
             AdGainSdk.getInstance().init(context, new AdGainSdkConfig.Builder()
                     .appId(mediationCustomInitConfig.getAppId())       //必填，向广推商务获取,配置到 gromore 后台
                     .userId("")  // 用户ID，有就填
