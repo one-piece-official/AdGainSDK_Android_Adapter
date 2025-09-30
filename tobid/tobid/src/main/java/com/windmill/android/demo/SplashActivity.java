@@ -167,6 +167,10 @@ public class SplashActivity extends Activity {
                 Log.d("lance", "------onSplashAdSuccessPresent------" + adInfo.getPlacementId());
             }
 
+            public void onSplashAdFailToPresent(WindMillError error, String placementId) {
+
+            }
+
             @Override
             public void onSplashAdSuccessLoad(String placementId) {
                 Log.d("lance", "------onSplashAdSuccessLoad------" + splashAd.isReady() + ":" + placementId);
