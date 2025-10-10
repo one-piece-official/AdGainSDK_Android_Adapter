@@ -26,7 +26,7 @@ public class GMBiddingUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("GMBiddingUtil", "notifyBiddingResult: Exception " + e.getMessage());
+//            Log.d("GMBiddingUtil", "notifyBiddingResult: Exception " + e.getMessage());
         }
     }
 
@@ -45,8 +45,9 @@ public class GMBiddingUtil {
     // 插屏激励Adapter 调用的方法
     protected static void adgainNotifyLoss(IBidding gtBaseAd, String winPrice, NotifyBiddingListener listener) {
         Map<String, Object> map = new HashMap<>();
-        Log.d("GMBiddingUtil", "adgainNotifyLoss: winPrice " + winPrice + " " + gtBaseAd);
+//        Log.d("GMBiddingUtil", "adgainNotifyLoss: winPrice " + winPrice + " " + gtBaseAd);
         map.put(IBidding.WIN_PRICE, winPrice);
+        map.put(IBidding.THIRD_MEDIATION, "gm");
         if (gtBaseAd != null) {
             gtBaseAd.sendLossNotification(map);
         }
