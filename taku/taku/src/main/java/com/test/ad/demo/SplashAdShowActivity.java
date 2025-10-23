@@ -327,7 +327,6 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
         //muse set RelativeLayout.LayoutParams
         directSplashCTATextView.setLayoutParams(layoutParams);
 
-        ATSDKGlobalSetting.setDirectlySplashCTAButton(directSplashCTATextView);
     }
 
     private void customDirectSplashAdShakeButton(){
@@ -346,6 +345,5 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
         //muse set RelativeLayout.LayoutParams
         directSplashShakeTextView.setLayoutParams(layoutParams);
 
-        ATSDKGlobalSetting.setDirectlySplashShakeButton(directSplashShakeTextView);
     }
 }

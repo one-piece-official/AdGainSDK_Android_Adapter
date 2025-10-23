@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:id="@+id/adsFl"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageAvater"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:scaleType="fitXY"-->
+<!--        android:src="@drawable/adscope_app_icon" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/jixushiyong"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignTop="@id/imageAvater"-->
+<!--        android:layout_toRightOf="@+id/imageAvater"-->
+<!--        android:text="我是标题" />-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignBottom="@id/imageAvater"-->
+<!--        android:layout_toRightOf="@+id/imageAvater"-->
+<!--        android:text="AdScope" />-->
+
+
+</RelativeLayout>

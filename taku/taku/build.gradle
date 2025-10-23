@@ -66,8 +66,8 @@ repositories {
 
 dependencies {
 
-//    implementation project(':taku:adgain-adapter')
-    implementation(name: 'adgain_taku_adapter_4.2.3', ext: 'aar')
+    implementation project(':taku:adgain-adapter')
+//    implementation(name: 'adgain_taku_adapter_4.2.3', ext: 'aar')
 
     implementation fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 
@@ -78,6 +78,10 @@ dependencies {
     implementation(name: 'anythink_splash', ext: 'aar')
     implementation(name: 'anythink_banner', ext: 'aar')
     implementation(name: 'anythink_china_core', ext: 'aar')
+
+    implementation(name: 'anythink_adx_sdk_kuying_6.5.37_necessary', ext: 'aar')
+    implementation(name: 'anythink_network_adx_kuying_sdk_necessary', ext: 'aar')
+
 
     compileOnly 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'

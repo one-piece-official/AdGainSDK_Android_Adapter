@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/native_unified_ad_width_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="输入期望广告view的宽"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/native_unified_ad_height_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="输入期望广告view的高"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/load_unified"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="加载原生自渲染" />
+
+    <Button
+        android:id="@+id/show_unified"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="展示原生自渲染"
+        android:visibility="gone"/>
+
+
+    <FrameLayout
+        android:id="@+id/native_unified_container_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

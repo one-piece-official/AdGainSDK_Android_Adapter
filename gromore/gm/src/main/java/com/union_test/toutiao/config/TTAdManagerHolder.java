@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
+import com.bytedance.sdk.openadsdk.LocationProvider;
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
@@ -110,6 +113,34 @@ public class TTAdManagerHolder {
                  * 使用聚合功能此开关必须设置为true，默认为false
                  */
                 .useMediation(true)
+                .customController(new TTCustomController() {
+                    @Override
+                    public boolean isCanUseLocation() {
+                        return false;
+                    }
+
+                    @Nullable
+                    @Override
+                    public LocationProvider getTTLocation() {
+                        return super.getTTLocation();
+                    }
+
+                    @Override
+                    public boolean alist() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean isCanUsePhoneState() {
+                        return false;
+                    }
+
+                    @Nullable
+                    @Override
+                    public String getDevOaid() {
+                        return "oaid_gm_test";
+                    }
+                })
 //                .customController(getTTCustomController()) //如果您需要设置隐私策略请参考该api
 //                .setMediationConfig(new MediationConfig.Builder() //可设置聚合特有参数详细设置请参考该api
 //                        .setMediationConfigUserInfoForSegment(getUserInfoForSegment())//如果您需要配置流量分组信息请参考该api

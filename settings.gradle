@@ -4,3 +4,4 @@ include 'gromore:gm', 'gromore:adgain-adapter'
 
 include 'jiguang:jiguang', 'jiguang:adgain-adapter'
 
+include 'beizi:app', 'beizi:amps-adapter'

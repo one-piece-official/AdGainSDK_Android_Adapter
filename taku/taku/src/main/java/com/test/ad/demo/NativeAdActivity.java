@@ -14,7 +14,6 @@ import com.anythink.core.api.ATAdConst;
 import com.anythink.core.api.ATAdInfo;
 import com.anythink.core.api.ATShowConfig;
 import com.anythink.core.api.AdError;
-import com.anythink.dlopt.api.ATAppDownloadListener;
 import com.anythink.nativead.api.ATNative;
 import com.anythink.nativead.api.ATNativeAdView;
 import com.anythink.nativead.api.ATNativeDislikeListener;
@@ -304,73 +303,6 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
 
                 TextView ctaTextView = (TextView) mNativePrepareInfo.getCtaView();
 
-                mNativeAd.setAdDownloadListener(new ATAppDownloadListener() {
-                    @Override
-                    public void onDownloadStart(ATAdInfo adInfo, long totalBytes, long currBytes, String fileName, String appName) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ctaTextView.setText("暂停下载");
-                                printLogOnUI("onDownloadStart totalBytes:" + totalBytes + ",currBytes:" + currBytes + ",appName:" + appName);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onDownloadUpdate(ATAdInfo adInfo, long totalBytes, long currBytes, String fileName, String appName) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ctaTextView.setText("暂停下载");
-                                printLogOnUI("onDownloadUpdate totalBytes:" + totalBytes + ",currBytes:" + currBytes + ",appName:" + appName);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onDownloadPause(ATAdInfo adInfo, long totalBytes, long currBytes, String fileName, String appName) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ctaTextView.setText("恢复下载");
-                                printLogOnUI("onDownloadPause totalBytes:" + totalBytes + ",currBytes:" + currBytes + ",appName:" + appName);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onDownloadFinish(ATAdInfo adInfo, long totalBytes, String fileName, String appName) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ctaTextView.setText("立即安装");
-                                printLogOnUI("onDownloadFinish totalBytes:" + totalBytes + ",appName:" + appName);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onDownloadFail(ATAdInfo adInfo, long totalBytes, long currBytes, String fileName, String appName) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ctaTextView.setText("开始下载");
-                                printLogOnUI("onDownloadFail totalBytes:" + totalBytes + ",currBytes:" + currBytes + ",appName:" + appName);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onInstalled(ATAdInfo adInfo, String fileName, String appName) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ctaTextView.setText("打开应用");
-                                printLogOnUI("onInstalled appName:" + appName);
-                            }
-                        });
-                    }
-                });
             }
 
             mNativeAd.prepare(mATNativeView, mNativePrepareInfo);

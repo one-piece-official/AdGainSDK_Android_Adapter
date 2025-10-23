@@ -1,19 +1,22 @@
 package com.test.ad.demo.util;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.anythink.core.api.ATAdConst;
+import com.anythink.core.api.ATNetworkConfig;
 import com.anythink.core.api.ATSDK;
 
 public class SDKUtil {
-   public static boolean isInitialized = false;
-   public static void initSDK(Context context) {
-      if(isInitialized){
-         return;
-      }
-      isInitialized = true;
-      ATSDK.setNetworkLogDebug(true);
-      ATSDK.integrationChecking(context.getApplicationContext());
+    public static boolean isInitialized = false;
+
+    public static void initSDK(Context context) {
+        if (isInitialized) {
+            return;
+        }
+        isInitialized = true;
+        ATSDK.setNetworkLogDebug(true);
+        ATSDK.integrationChecking(context.getApplicationContext());
 //        ATSDK.deniedUploadDeviceInfo(
 //                DeviceDataInfo.DEVICE_SCREEN_SIZE
 //                , DeviceDataInfo.ANDROID_ID
@@ -39,10 +42,11 @@ public class SDKUtil {
 //
 //        );
 
-      ATSDK.setPersonalizedAdStatus(ATAdConst.PRIVACY.PERSIONALIZED_ALLOW_STATUS);
-      ATSDK.init(context, PlacementIdUtil.getAppId(context), PlacementIdUtil.getAppKey(context));
-
+        ATSDK.setPersonalizedAdStatus(ATAdConst.PRIVACY.PERSIONALIZED_ALLOW_STATUS);
+        ATSDK.init(context, PlacementIdUtil.getAppId(context), PlacementIdUtil.getAppKey(context));
+        String version = ATSDK.getSDKVersionName();
+        Log.d("SDKUtil", "version:" + version);
 //        ATNetworkConfig atNetworkConfig = getAtNetworkConfig();
 //        ATSDK.init(this, appid, appKey, atNetworkConfig);
-   }
+    }
 }

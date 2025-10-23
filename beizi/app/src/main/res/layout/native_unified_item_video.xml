@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xyz.adscope.amps.ad.unified.view.AMPSUnifiedRootContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ad_unified_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/ad_main_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <xyz.adscope.amps.ad.unified.view.AMPSUnifiedMediaViewStub
+                android:id="@+id/ad_main_video"
+                android:layout_width="match_parent"
+                android:layout_height="240dp" />
+
+            <RelativeLayout
+                android:id="@+id/ad_logo_rl"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:id="@+id/ad_download_info_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="50dp"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <FrameLayout
+                android:id="@+id/ad_shake_view_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/ad_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ad_main_container"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="150dp"
+            android:text="Title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ad_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ad_title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="150dp"
+            android:text="desc" />
+
+        <RelativeLayout
+            android:id="@+id/ad_action_rl"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/ad_main_container"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp" />
+
+
+    </RelativeLayout>
+
+</xyz.adscope.amps.ad.unified.view.AMPSUnifiedRootContainer>
+

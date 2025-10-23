@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:id="@+id/splash_button_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/splash_load_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/teal_200"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="请求广告" />
+
+        <TextView
+            android:id="@+id/splash_show_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/teal_200"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="显示广告" />
+
+        <TextView
+            android:id="@+id/splash_load_show_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/teal_200"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="请求并显示广告" />
+
+        <TextView
+            android:id="@+id/splash_preload_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/teal_200"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="预加载开屏广告" />
+
+        <TextView
+            android:id="@+id/splash_preload_current_show_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/teal_200"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="当前页面显示预加载广告" />
+
+        <TextView
+            android:id="@+id/splash_preload_other_show_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/teal_200"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="其它页面显示预加载广告" />
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/splash_container_fl"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent" />
+
+
+
+</RelativeLayout>
