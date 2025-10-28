@@ -45,9 +45,7 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
                 return;
             }
 
-            Log.d(TAG, "reward getADNNetworkSlotId: " + serviceConfig.getADNNetworkSlotId());
-//            Log.d(TAG, "reward  getADNNetworkName: " + serviceConfig.getADNNetworkName());
-//            Log.d(TAG, "reward  getCustomAdapterJson: " + AdGainCustomerInit.getBidFloor(serviceConfig.getCustomAdapterJson()));
+            AdGainCustomerInit.setWXAppId(serviceConfig.getCustomAdapterJson());
             RewardAdListener rewardAdListener = new RewardAdListener() {
                 @Override
                 public void onRewardAdLoadSuccess() {
@@ -149,6 +147,7 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(serviceConfig.getADNNetworkSlotId())     // 广推广告位 从商务获取
                     .setExtOption(options)
+                    .setAppId(AdGainCustomerInit.appId)
                     .setBidFloor(AdGainCustomerInit.getBidFloor(serviceConfig.getCustomAdapterJson()))
                     .build();
 

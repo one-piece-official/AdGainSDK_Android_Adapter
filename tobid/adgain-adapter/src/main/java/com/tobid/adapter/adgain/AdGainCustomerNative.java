@@ -32,21 +32,22 @@ public class AdGainCustomerNative extends WMCustomNativeAdapter implements Nativ
         try {
             wmNativeAdDataList.clear();
             // 这个数值来自sigmob后台广告位ID的配置
-            if (null == nativeUnifiedAd) {
-                String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
-                String appId = (String) serverExtra.get(WMConstants.APP_ID);
-                Map<String, Object> options = new HashMap<>(serverExtra);
-                if (localExtra != null) {
-                    options.putAll(localExtra);
-                }
-                AdRequest adRequest = new AdRequest.Builder()
-                        .setCodeId(codeId)
-                        .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra))
-                        .setExtOption(options)
-                        .setAppId(appId)
-                        .build();
-                nativeUnifiedAd = new NativeUnifiedAd(adRequest, this);
+//            if (null == nativeUnifiedAd) {
+            String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
+//            String appId = (String) serverExtra.get(WMConstants.APP_ID);
+            Map<String, Object> options = new HashMap<>(serverExtra);
+            if (localExtra != null) {
+                options.putAll(localExtra);
             }
+//                codeId = codeId + "t";
+            AdRequest adRequest = new AdRequest.Builder()
+                    .setCodeId(codeId)
+                    .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra))
+                    .setExtOption(options)
+                    .setAppId(AdGainCustomerProxy.appId)
+                    .build();
+            nativeUnifiedAd = new NativeUnifiedAd(adRequest, this);
+//            }
             nativeUnifiedAd.loadAd();
         } catch (Throwable tr) {
             Log.e(TAG, "loadAd exception: ", tr);
@@ -100,8 +101,10 @@ public class AdGainCustomerNative extends WMCustomNativeAdapter implements Nativ
 
     @Override
     public void onAdError(AdError error) {
-        Log.d(TAG, "onAdError: " + " error: " + error);
-        callLoadFail(new WMAdapterError(error.getErrorCode(), error.getMessage()));
+        if (error != null) {
+            Log.d(TAG, "onAdError: " + " error: " + error);
+            callLoadFail(new WMAdapterError(error.getErrorCode(), error.getMessage()));
+        }
     }
 
     @Override

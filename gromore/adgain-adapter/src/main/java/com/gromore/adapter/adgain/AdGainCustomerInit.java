@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Environment;
 import android.os.FileObserver;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -27,6 +28,8 @@ public class AdGainCustomerInit extends MediationCustomInitLoader {
 
     public static final String TAG = "AdGainCustomer";
     private MediationInitConfig config = null;
+    private static String wxAppId = "";
+    public static String appId;
 
     @Override
     public String getNetworkSdkVersion() {
@@ -43,7 +46,6 @@ public class AdGainCustomerInit extends MediationCustomInitLoader {
                 Class clazz = controlleClz.getClass();
                 Field fields[] = clazz.getDeclaredFields();
                 for (int i = 0; i < fields.length; i++) {
-                    Log.d("--------initializeADN ", "Field name: " + fields[i].getName());
                     Field field = clazz.getDeclaredField(fields[i].getName());
                     field.setAccessible(true);
                     if (field.get(controlleClz) instanceof MediationInitConfig)
@@ -52,7 +54,7 @@ public class AdGainCustomerInit extends MediationCustomInitLoader {
             } catch (Exception e) {
             }
             AdGainSdk.getInstance().init(context, new AdGainSdkConfig.Builder()
-                    .appId(mediationCustomInitConfig.getAppId())       //必填，向广推商务获取,配置到 gromore 后台
+                    .appId(appId = mediationCustomInitConfig.getAppId())       //必填，向广推商务获取,配置到 gromore 后台
                     .userId("")  // 用户ID，有就填
                     .showLog(BuildConfig.DEBUG)
                     .addCustomData(customData)  //自定义数据
@@ -92,6 +94,7 @@ public class AdGainCustomerInit extends MediationCustomInitLoader {
                         public String getOaid() {
                             return config != null ? config.getDevOaid() : ""; // 传信通院ID
                         }
+
                         @Override
                         public String getAndroidId() {
                             return config != null ? config.getAndroidId() : "";
@@ -149,6 +152,23 @@ public class AdGainCustomerInit extends MediationCustomInitLoader {
         } catch (Exception e) {
         }
         return bidFloor;
+    }
+
+
+    /*
+    {
+         "wxAppId": "wechatAppId"
+     }
+     */
+    public static void setWXAppId(String json) {
+        if (!TextUtils.isEmpty(json) && TextUtils.isEmpty(wxAppId)) {
+            try {
+                JSONObject object = new JSONObject(json);
+                wxAppId = object.getString("wxAppId");
+                AdGainSdk.getInstance().setWXAppId(wxAppId);
+            } catch (Exception e) {
+            }
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package com.gromore.adapter.adgain;
 
+import static com.gromore.adapter.adgain.AdGainCustomerInit.TAG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -98,12 +100,10 @@ public class AdGainInterAdapter extends MediationCustomInterstitialLoader implem
                 }
             };
 
-            Map<String, Object> options = new HashMap<>();
-            options.put("inter_extra_test_key", "inter_extra_test_value");
-
+            AdGainCustomerInit.setWXAppId(serviceConfig.getCustomAdapterJson());
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(serviceConfig.getADNNetworkSlotId())
-                    .setExtOption(options)
+                    .setAppId(AdGainCustomerInit.appId)
                     .setBidFloor(AdGainCustomerInit.getBidFloor(serviceConfig.getCustomAdapterJson()))
                     .build();
 

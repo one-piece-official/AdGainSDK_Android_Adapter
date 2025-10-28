@@ -20,6 +20,7 @@ import com.anythink.core.api.ATInitMediation;
 import com.anythink.core.api.MediationInitCallback;
 import com.anythink.interstitial.unitgroup.api.CustomInterstitialAdapter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -81,11 +82,16 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
 
             @Override
             public void onInterstitialAdLoadError(AdError adError) {
-                notifyATLoadFail(String.valueOf(adError.getErrorCode()), adError.getMessage());
+                if (adError != null) {
+                    notifyATLoadFail(String.valueOf(adError.getErrorCode()), adError.getMessage());
+                    Log.d(TAG, "onInterstitialAdLoadError " + adError.getErrorCode() + " msg" + adError.getMessage());
+                }
             }
 
             @Override
             public void onInterstitialAdLoadSuccess() {
+                Log.d(TAG, "onInterstitialAdLoadSuccess ");
+
                 if (mLoadListener != null) {
                     mLoadListener.onAdDataLoaded();
                 }
@@ -193,5 +199,17 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
             mGTInterstitialAd = null;
         }
     }
+
+    @Override
+    public Map<String, Object> getNetworkInfoMap() {
+        if (mGTInterstitialAd != null && mGTInterstitialAd.getExtraInfo() != null) {
+            Map<String, Object> networkInfoMap = new HashMap<>();
+            networkInfoMap.put("request_id", mGTInterstitialAd.getExtraInfo().get("loadId"));
+            networkInfoMap.put("code_id", mGTInterstitialAd.getExtraInfo().get("codeId"));
+            return networkInfoMap;
+        }
+        return super.getNetworkInfoMap();
+    }
+
 
 }

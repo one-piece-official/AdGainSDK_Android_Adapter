@@ -138,8 +138,10 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
 
             @Override
             public void onRewardAdLoadError(AdError adError) {
-                notifyATLoadFail(adError.getErrorCode() + "", adError.getMessage());
-
+                if (adError != null) {
+                    notifyATLoadFail(adError.getErrorCode() + "", adError.getMessage());
+                    Log.d(TAG, "onRewardAdLoadError " + adError.getErrorCode() + " msg" + adError.getMessage());
+                }
             }
 
             @Override
@@ -202,11 +204,6 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
     }
 
     @Override
-    public Map<String, Object> getNetworkInfoMap() {
-        return new HashMap<>();
-    }
-
-    @Override
     public ATInitMediation getMediationInitManager() {
         return AdGainInitManager.getInstance();
     }
@@ -217,6 +214,17 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
             mRewardVideoAD.destroyAd();
             mRewardVideoAD = null;
         }
+    }
+
+    @Override
+    public Map<String, Object> getNetworkInfoMap() {
+        if (mRewardVideoAD != null && mRewardVideoAD.getExtraInfo() != null) {
+            Map<String, Object> networkInfoMap = new HashMap<>();
+            networkInfoMap.put("request_id", mRewardVideoAD.getExtraInfo().get("loadId"));
+            networkInfoMap.put("code_id", mRewardVideoAD.getExtraInfo().get("codeId"));
+            return networkInfoMap;
+        }
+        return super.getNetworkInfoMap();
     }
 
 }

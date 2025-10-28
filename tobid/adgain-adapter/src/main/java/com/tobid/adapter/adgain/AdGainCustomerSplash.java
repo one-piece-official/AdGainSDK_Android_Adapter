@@ -34,12 +34,12 @@ public class AdGainCustomerSplash extends WMCustomSplashAdapter implements Splas
         try {
             // 这个数值来自sigmob后台广告位ID的配置
             String unitId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
-            String appId = (String) serverExtra.get(WMConstants.APP_ID);
+//            String appId = (String) serverExtra.get(WMConstants.APP_ID);
             int w = context.getApplicationContext().getResources().getDisplayMetrics().widthPixels;
             int h = context.getApplicationContext().getResources().getDisplayMetrics().heightPixels;
             AdRequest adRequest = new AdRequest.Builder().setCodeId(unitId)
                     .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra))
-                    .setAppId(appId)
+                    .setAppId(AdGainCustomerProxy.appId)
                     .setWidth(w).setHeight(h).build();
             splashAd = new SplashAd(adRequest, this);
             splashAd.loadAd();
@@ -101,7 +101,10 @@ public class AdGainCustomerSplash extends WMCustomSplashAdapter implements Splas
 
     @Override
     public void onSplashAdLoadFail(AdError error) {
-        callLoadFail(new WMAdapterError(error.getErrorCode(), error.getMessage()));
+        if (error != null) {
+            Log.d(TAG, "onRewardAdLoadError " + error.getErrorCode() + " msg " + error.getMessage());
+            callLoadFail(new WMAdapterError(error.getErrorCode(), error.getMessage()));
+        }
     }
 
     @Override

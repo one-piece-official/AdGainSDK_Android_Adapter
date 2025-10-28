@@ -21,6 +21,7 @@ import com.anythink.nativead.unitgroup.api.CustomNativeAd;
 import com.anythink.nativead.unitgroup.api.CustomNativeAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,7 +107,10 @@ public class AdGainNativeAdapter extends CustomNativeAdapter {
 
             @Override
             public void onAdError(AdError error) {
-                notifyATLoadFail(error.getErrorCode() + "", error.getMessage());
+                if (error != null) {
+                    Log.d(TAG, "onAdError " + error.getErrorCode() + " msg" + error.getMessage());
+                    notifyATLoadFail(error.getErrorCode() + "", error.getMessage());
+                }
             }
 
             @Override
@@ -125,8 +129,8 @@ public class AdGainNativeAdapter extends CustomNativeAdapter {
                             BiddingNotice notice = new BiddingNotice(nativeAd);
 
                             Log.d(TAG, "onAdLoad: onC2SBiddingResultWithCache price = " + price);
-
-                            mBiddingListener.onC2SBidResult(ATBiddingResult.success(price, System.currentTimeMillis() + "", notice, ATAdConst.CURRENCY.RMB_CENT));
+                            mBiddingListener.onC2SBiddingResultWithCache(ATBiddingResult.success(price, System.currentTimeMillis() + "", notice, ATAdConst.CURRENCY.RMB_CENT), gdtNativeAd);
+//                            mBiddingListener. (ATBiddingResult.success(price, System.currentTimeMillis() + "", notice, ATAdConst.CURRENCY.RMB_CENT));
                         }
 
                         return;
@@ -182,5 +186,17 @@ public class AdGainNativeAdapter extends CustomNativeAdapter {
             nativeAd.destroyAd();
         }
     }
+
+    @Override
+    public Map<String, Object> getNetworkInfoMap() {
+        if (nativeAd != null && nativeAd.getExtraInfo() != null) {
+            Map<String, Object> networkInfoMap = new HashMap<>();
+            networkInfoMap.put("request_id", nativeAd.getExtraInfo().get("loadId"));
+            networkInfoMap.put("code_id", nativeAd.getExtraInfo().get("codeId"));
+            return networkInfoMap;
+        }
+        return super.getNetworkInfoMap();
+    }
+
 
 }

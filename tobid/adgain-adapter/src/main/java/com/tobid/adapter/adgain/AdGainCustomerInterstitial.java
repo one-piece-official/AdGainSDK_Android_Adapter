@@ -34,9 +34,8 @@ public class AdGainCustomerInterstitial extends WMCustomInterstitialAdapter impl
         try {
             // 这个数值来自sigmob后台广告位ID的配置
             String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
-            String appId = (String) serverExtra.get(WMConstants.APP_ID);
             AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId)
-                    .setAppId(appId)
+                    .setAppId(AdGainCustomerProxy.appId)
                     .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra)).build();
             interstitialAd = new InterstitialAd(adRequest, this);
             interstitialAd.loadAd();
@@ -123,7 +122,10 @@ public class AdGainCustomerInterstitial extends WMCustomInterstitialAdapter impl
     }
 
     @Override
-    public void onInterstitialAdShowError(AdError adError) {
-        callVideoAdPlayError(new WMAdapterError(adError.getErrorCode(), adError.getMessage()));
+    public void onInterstitialAdShowError(AdError error) {
+        if (error!=null) {
+            Log.d(TAG, "onRewardAdLoadError " + error.getErrorCode() + " msg " + error.getMessage());
+            callVideoAdPlayError(new WMAdapterError(error.getErrorCode(), error.getMessage()));
+        }
     }
 }

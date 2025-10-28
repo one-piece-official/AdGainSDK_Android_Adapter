@@ -2,6 +2,7 @@ package com.tobid.adapter.adgain;
 
 import android.content.Context;
 import android.location.Location;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.adgain.sdk.AdGainSdk;
@@ -25,21 +26,33 @@ import java.util.Map;
 public class AdGainCustomerProxy extends WMCustomAdapterProxy {
     private static final String TAG = "AdGainCustomerProxy";
     private static final String SERVER_EXTRA_CUSTOM_APP_ID = "appId";
+    private static final String WXAPPID = "wxAppId"; // 微信开放平台的appID
+
     private WMCustomController controller = null;
+    public static String appId;
+
+    private String buildTs = com.tobid.adapter.adgain.BuildConfig.buildAdapterTs;
 
     @Override
     public void initializeADN(Context context, Map<String, Object> serverExtra) {
-        Log.d(TAG, "initializeADN: s: " + serverExtra);
+        Log.d(TAG, "initializeADN buildTs: " + buildTs + " s:" + serverExtra);
         try {
             String customInfo = (String) serverExtra.get(WMConstants.CUSTOM_INFO);
             JSONObject joCustom = new JSONObject(customInfo);
             String gtAdAppId = joCustom.getString(SERVER_EXTRA_CUSTOM_APP_ID);
             HashMap<String, Object> customData = new HashMap<>();
-            customData.put(IBidding.THIRD_MEDIATION,"tobid");
+            customData.put(IBidding.THIRD_MEDIATION, "tobid");
             WMAdConfig adConfig = WindMillAd.sharedAds().getAdConfig();
             if (adConfig != null && adConfig.getCustomController() != null) {
                 controller = adConfig.getCustomController();
             }
+            try {
+                if (!TextUtils.isEmpty(joCustom.optString(WXAPPID))) {
+                    AdGainSdk.getInstance().setWXAppId(joCustom.optString(WXAPPID));
+                }
+            } catch (Exception e) {
+            }
+            appId = gtAdAppId;
             AdGainSdkConfig config = new AdGainSdkConfig.Builder()
                     .appId(gtAdAppId)
                     .showLog(BuildConfig.DEBUG)

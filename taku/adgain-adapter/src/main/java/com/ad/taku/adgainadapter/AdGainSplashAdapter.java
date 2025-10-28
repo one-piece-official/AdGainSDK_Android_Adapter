@@ -15,25 +15,20 @@ import com.adgain.sdk.api.SplashAd;
 import com.adgain.sdk.api.SplashAdListener;
 import com.anythink.core.api.ATAdConst;
 import com.anythink.core.api.ATBiddingListener;
+import com.anythink.core.api.ATBiddingResult;
 import com.anythink.core.api.ATInitMediation;
 import com.anythink.core.api.ErrorCode;
 import com.anythink.core.api.MediationInitCallback;
 import com.anythink.splashad.unitgroup.api.CustomSplashAdapter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class AdGainSplashAdapter extends CustomSplashAdapter {
-
-
     private String mAppId;
     private String codeId;
-
-    private boolean isReady;
-
     private SplashAd splashAD;
-
     boolean isC2SBidding = false;
-
     @Override
     public boolean startBiddingRequest(Context context, Map<String, Object> serverExtra, Map<String, Object> localExtra, ATBiddingListener biddingListener) {
 
@@ -52,13 +47,10 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
         mAppId = getAppId(serverExtra);
         codeId = getCodeId(serverExtra);
         Log.d(AdGainInitManager.TAG, mAppId + " codeId: " + codeId + " map " + serverExtra);
-        isReady = false;
-
         if (TextUtils.isEmpty(mAppId)) {
             notifyATLoadFail("", "AdGain app_id is empty.");
             return;
         }
-
         AdGainInitManager.getInstance().initSDK(context, serverExtra, new MediationInitCallback() {
             @Override
             public void onSuccess() {
@@ -79,18 +71,8 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
         splashAD = new SplashAd(adRequest, new SplashAdListener() {
             @Override
             public void onAdLoadSuccess() {
-                isReady = true;
-                if (isC2SBidding) {
-                    if (mBiddingListener != null) {
-                        if (splashAD != null) {
-                            mBiddingListener.onC2SBidResult(BiddingNotice.biddingResult(splashAD));
-                        } else {
-                            notifyATLoadFail("", "AdGain SplashAD had been destroy.");
-                        }
-                    }
-                } else if (mLoadListener != null) {
+                if (mLoadListener != null)
                     mLoadListener.onAdDataLoaded();
-                }
             }
 
             @Override
@@ -186,7 +168,7 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
             return;
         }
 
-        if (isReady && splashAD != null) {
+        if ( splashAD != null) {
 
             container.post(() -> {
 
@@ -211,6 +193,18 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
     @Override
     public String getNetworkPlacementId() {
         return codeId;
+    }
+
+
+    @Override
+    public Map<String, Object> getNetworkInfoMap() {
+        if (splashAD != null && splashAD.getExtraInfo() != null) {
+            Map<String, Object> networkInfoMap = new HashMap<>();
+            networkInfoMap.put("request_id", splashAD.getExtraInfo().get("loadId"));
+            networkInfoMap.put("code_id", splashAD.getExtraInfo().get("codeId"));
+            return networkInfoMap;
+        }
+        return super.getNetworkInfoMap();
     }
 
     @Override

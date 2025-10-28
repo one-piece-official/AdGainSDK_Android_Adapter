@@ -31,7 +31,7 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
                 callLoadFail(40000, "serviceConfig 为 null");
                 return;
             }
-
+            AdGainCustomerInit.setWXAppId(serviceConfig.getCustomAdapterJson());
             SplashAdListener mSplashAdListener = new SplashAdListener() {
 
                 @Override
@@ -92,6 +92,7 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
             GMBiddingUtil.addNotifyBiddingListener(this);
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(serviceConfig.getADNNetworkSlotId())
+                    .setAppId(AdGainCustomerInit.appId)
                     .setBidFloor(AdGainCustomerInit.getBidFloor(serviceConfig.getCustomAdapterJson()))
                     .build();
             splashAd = new SplashAd(adRequest, mSplashAdListener);

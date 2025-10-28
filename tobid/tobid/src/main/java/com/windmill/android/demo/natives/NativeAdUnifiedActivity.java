@@ -176,7 +176,8 @@ public class NativeAdUnifiedActivity extends Activity {
         options.put(WMConstants.AD_WIDTH, adWidth);//针对于模版广告有效、单位dp
         options.put(WMConstants.AD_HEIGHT, adHeight);//自适应高度
         options.put("user_id", String.valueOf(userID));
-        windNativeAd = new WMNativeAd(this, new WMNativeAdRequest(placementId, String.valueOf(userID), 3, options));
+        if (windNativeAd == null)
+            windNativeAd = new WMNativeAd(this, new WMNativeAdRequest(placementId, String.valueOf(userID), 3, options));
         windNativeAd.loadAd(new WMNativeAd.NativeAdLoadListener() {
             @Override
             public void onError(WindMillError error, String placementId) {

@@ -15,6 +15,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:dropDownListViewStyle">@style/spinner_style</item>
         <item name="android:windowDisablePreview">true</item>
+        <item name="android:textColor">#000333</item>
     </style>
 
     <style name="spinner_style" parent="Widget.AppCompat.ListView.DropDown">

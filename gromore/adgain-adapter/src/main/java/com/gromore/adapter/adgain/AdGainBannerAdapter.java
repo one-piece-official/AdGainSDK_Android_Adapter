@@ -45,6 +45,7 @@ public class AdGainBannerAdapter extends MediationCustomBannerLoader implements 
 
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(codeid)
+                    .setAppId(AdGainCustomerInit.appId)
                     .build();
 
             mBannerAd = new BannerAd(adRequest, this, true, true);

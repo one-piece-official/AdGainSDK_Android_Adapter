@@ -26,6 +26,7 @@ public class AdGainInitManager extends ATInitMediation {
     public static final String TAG = "---AdGainAdapter";
 
     private volatile static AdGainInitManager sInstance;
+    private static final String WXAPPID = "wxAppId"; // 微信开放平台appID
 
     int personAdStatus = 0;
 
@@ -54,83 +55,92 @@ public class AdGainInitManager extends ATInitMediation {
     public synchronized void initSDK(Context context, Map<String, Object> serviceExtras, MediationInitCallback onInitCallback) {
         try {
             personAdStatus = ATSDK.getPersionalizedAdStatus();
-            Log.d(TAG, "initSDK: personalAd = " + personAdStatus);
+            Log.d(TAG, "initSDK: personalAd = " + serviceExtras);
         } catch (Throwable ignored) {
         }
+        try {
 
-        if (mHasInit) {
-            if (onInitCallback != null) {
-                onInitCallback.onSuccess();
-            }
-            return;
-        }
 
-        synchronized (mLock) {
-
-            if (mIsIniting.get()) {
+            if (mHasInit) {
                 if (onInitCallback != null) {
-                    mListeners.add(onInitCallback);
+                    onInitCallback.onSuccess();
                 }
                 return;
             }
 
-            if (mListeners == null) {
-                mListeners = new ArrayList<>();
+            synchronized (mLock) {
+
+                if (mIsIniting.get()) {
+                    if (onInitCallback != null) {
+                        mListeners.add(onInitCallback);
+                    }
+                    return;
+                }
+
+                if (mListeners == null) {
+                    mListeners = new ArrayList<>();
+                }
+
+                mIsIniting.set(true);
             }
 
-            mIsIniting.set(true);
-        }
+            String appId = getAppId(serviceExtras);
+            if (onInitCallback != null) {
+                mListeners.add(onInitCallback);
+            }
 
-        String appId = getAppId(serviceExtras);
-        if (onInitCallback != null) {
-            mListeners.add(onInitCallback);
-        }
+            if (serviceExtras.containsKey(ATInitMediation.KEY_LOCAL)) {
+                mLocalInitAppId = appId;
+            } else if (mLocalInitAppId != null && !TextUtils.equals(mLocalInitAppId, appId)) {
+                checkToSaveInitData(getNetworkName(), serviceExtras, mLocalInitAppId);
+                mLocalInitAppId = null;
+            }
 
-        if (serviceExtras.containsKey(ATInitMediation.KEY_LOCAL)) {
-            mLocalInitAppId = appId;
-        } else if (mLocalInitAppId != null && !TextUtils.equals(mLocalInitAppId, appId)) {
-            checkToSaveInitData(getNetworkName(), serviceExtras, mLocalInitAppId);
-            mLocalInitAppId = null;
-        }
+            if (serviceExtras.get(WXAPPID) != null && !TextUtils.isEmpty(serviceExtras.get(WXAPPID).toString())) {
+//                Log.d(TAG, "initSDK: WXAPPID = " + serviceExtras.get(WXAPPID).toString());
+                AdGainSdk.getInstance().setWXAppId(serviceExtras.get(WXAPPID).toString());
+            }
 
-        Map<String, Object> customData = new HashMap<>();
-        customData.put(IBidding.THIRD_MEDIATION, "taku");
+            Map<String, Object> customData = new HashMap<>();
+            customData.put(IBidding.THIRD_MEDIATION, "taku");
 
-        Log.d(TAG, "initSDK: real start  appId = " + appId);
-        AdGainSdk.getInstance().init(context, new AdGainSdkConfig.Builder()
-                .appId(appId)         //必填
-                .showLog(false)    // 是否展示 adsdk 日志
-                .addCustomData(customData) //自定义数据
+            Log.d(TAG, "initSDK: real start  appId = " + appId);
+            AdGainSdk.getInstance().init(context, new AdGainSdkConfig.Builder()
+                    .appId(appId)         //必填
+                    .showLog(false)    // 是否展示 adsdk 日志
+                    .addCustomData(customData) //自定义数据
 
-                .customController(new CustomController() {
-                    @Override
-                    public String getOaid() {
-                        return "";
-                    }
-                })
-                .setInitCallback(new InitCallback() {
-                    @Override
-                    public void onSuccess() {
-                        // 初始化成功 后 再加载广告
-                        Log.d(TAG, "initSDK ------------onSuccess----------- ");
+                    .customController(new CustomController() {
+                        @Override
+                        public String getOaid() {
+                            return "";
+                        }
+                    })
+                    .setInitCallback(new InitCallback() {
+                        @Override
+                        public void onSuccess() {
+                            // 初始化成功 后 再加载广告
+                            Log.d(TAG, "initSDK ------------onSuccess----------- ");
 
-                        mHasInit = true;
-                        callbackResult(true, null, null);
-                    }
+                            mHasInit = true;
+                            callbackResult(true, null, null);
+                        }
 
-                    @Override
-                    public void onFail(int code, String msg) {
-                        Log.d(TAG, "initSDK ------------onFail----------- msg = " + msg);
+                        @Override
+                        public void onFail(int code, String msg) {
+                            Log.d(TAG, "initSDK ------------onFail----------- msg = " + msg);
 
-                        callbackResult(false, code + "", "GDT initSDK failed." + msg);
-                    }
-                }).build());
+                            callbackResult(false, code + "", "GDT initSDK failed." + msg);
+                        }
+                    }).build());
 
-        if (personAdStatus == ATAdConst.PRIVACY.PERSIONALIZED_LIMIT_STATUS) {
-            AdGainSdk.getInstance().setPersonalizedAdvertisingOn(false);
-
-        } else {
-            AdGainSdk.getInstance().setPersonalizedAdvertisingOn(true);  // 开启 个性化广告
+            if (personAdStatus == ATAdConst.PRIVACY.PERSIONALIZED_LIMIT_STATUS) {
+                AdGainSdk.getInstance().setPersonalizedAdvertisingOn(false);
+            } else {
+                AdGainSdk.getInstance().setPersonalizedAdvertisingOn(true);  // 开启 个性化广告
+            }
+        } catch (Exception e) {
+            callbackResult(false, "-1", "GDT initSDK Exception " + e.getMessage());
         }
     }
 

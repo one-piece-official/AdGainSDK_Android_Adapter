@@ -38,11 +38,11 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
         try {
             // 这个数值来自sigmob后台广告位ID的配置
             String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
-            String appId = (String) serverExtra.get(WMConstants.APP_ID);
+//            String appId = (String) serverExtra.get(WMConstants.APP_ID);
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(codeId)
                     .setExtOption(localExtra)
-                    .setAppId(appId)
+                    .setAppId(AdGainCustomerProxy.appId)
                     .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra))
                     .build();
             rewardAd = new RewardAd(adRequest, this);
@@ -57,7 +57,7 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
     @Override
     public void showAd(Activity activity, HashMap<String, String> localExtra, Map<String, Object> serverExtra) {
         Log.d(TAG, "showAd: l" + localExtra);
-        Log.d(TAG, "showAd: s" + serverExtra);
+//        Log.d(TAG, "showAd: s" + serverExtra);
         try {
             rewardAd.showAd(activity);
         } catch (Throwable tr) {
@@ -134,7 +134,10 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
 
     @Override
     public void onRewardAdLoadError(AdError adError) {
-        callLoadFail(new WMAdapterError(adError.getErrorCode(), adError.getMessage()));
+        if (adError!=null) {
+            Log.d(TAG, "onRewardAdLoadError " + adError.getErrorCode() +" msg " + adError.getMessage());
+            callLoadFail(new WMAdapterError(adError.getErrorCode(), adError.getMessage()));
+        }
     }
 
     @Override

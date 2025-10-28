@@ -34,11 +34,12 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
                 return;
             }
             Log.e(TAG, "load custom native ad----- " + serviceConfig.getADNNetworkSlotId() + "  " + getBiddingType());
-
+            AdGainCustomerInit.setWXAppId(serviceConfig.getCustomAdapterJson());
             Map<String, Object> options = new HashMap<>();
 
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(serviceConfig.getADNNetworkSlotId())
+                    .setAppId(AdGainCustomerInit.appId)
                     .setBidFloor(AdGainCustomerInit.getBidFloor(serviceConfig.getCustomAdapterJson()))
                     .setExtOption(options)
                     .build();
