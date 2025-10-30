@@ -115,43 +115,46 @@ public class AdGainNativeAdapter extends CustomNativeAdapter {
 
             @Override
             public void onAdLoad(List<NativeAdData> list) {
-                if (list != null && !list.isEmpty()) {
+                try {
+                    if (list != null && !list.isEmpty()) {
 
-                    if (isC2SBidding) {
+                        if (isC2SBidding) {
 
-                        NativeAdData unifiedADData = list.get(0);
+                            NativeAdData unifiedADData = list.get(0);
 
-                        if (unifiedADData != null && mBiddingListener != null) {
-                            double price = unifiedADData.getPrice();
+                            if (unifiedADData != null && mBiddingListener != null) {
+                                double price = unifiedADData.getPrice();
 
-                            AdGainNativeAd gdtNativeAd = new AdGainNativeAd(context, unifiedADData, mVideoMuted, mVideoAutoPlay, mVideoDuration);
+                                AdGainNativeAd gdtNativeAd = new AdGainNativeAd(context, unifiedADData, mVideoMuted, mVideoAutoPlay, mVideoDuration);
 
-                            BiddingNotice notice = new BiddingNotice(nativeAd);
+                                BiddingNotice notice = new BiddingNotice(nativeAd);
 
-                            Log.d(TAG, "onAdLoad: onC2SBiddingResultWithCache price = " + price);
-                            mBiddingListener.onC2SBiddingResultWithCache(ATBiddingResult.success(price, System.currentTimeMillis() + "", notice, ATAdConst.CURRENCY.RMB_CENT), gdtNativeAd);
+                                Log.d(TAG, "onAdLoad: onC2SBiddingResultWithCache price = " + price);
+                                mBiddingListener.onC2SBiddingResultWithCache(ATBiddingResult.success(price, System.currentTimeMillis() + "", notice, ATAdConst.CURRENCY.RMB_CENT), gdtNativeAd);
 //                            mBiddingListener. (ATBiddingResult.success(price, System.currentTimeMillis() + "", notice, ATAdConst.CURRENCY.RMB_CENT));
+                            }
+
+                            return;
                         }
 
-                        return;
+                        List<CustomNativeAd> resultList = new ArrayList<>();
+
+                        for (NativeAdData unifiedADData : list) {
+                            AdGainNativeAd gdtNativeAd = new AdGainNativeAd(context, unifiedADData, mVideoMuted, mVideoAutoPlay, mVideoDuration);
+                            resultList.add(gdtNativeAd);
+                        }
+
+                        CustomNativeAd[] customNativeAds = new CustomNativeAd[resultList.size()];
+                        customNativeAds = resultList.toArray(customNativeAds);
+
+                        if (mLoadListener != null) {
+                            mLoadListener.onAdCacheLoaded(customNativeAds);
+                        }
+
+                    } else {
+                        notifyATLoadFail("", "Ad list is empty");
                     }
-
-                    List<CustomNativeAd> resultList = new ArrayList<>();
-
-                    for (NativeAdData unifiedADData : list) {
-                        AdGainNativeAd gdtNativeAd = new AdGainNativeAd(context, unifiedADData, mVideoMuted, mVideoAutoPlay, mVideoDuration);
-                        resultList.add(gdtNativeAd);
-                    }
-
-                    CustomNativeAd[] customNativeAds = new CustomNativeAd[resultList.size()];
-                    customNativeAds = resultList.toArray(customNativeAds);
-
-                    if (mLoadListener != null) {
-                        mLoadListener.onAdCacheLoaded(customNativeAds);
-                    }
-
-                } else {
-                    notifyATLoadFail("", "Ad list is empty");
+                } catch (Exception e) {
                 }
             }
 

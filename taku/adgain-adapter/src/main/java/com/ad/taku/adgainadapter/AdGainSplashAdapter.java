@@ -29,6 +29,7 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
     private String codeId;
     private SplashAd splashAD;
     boolean isC2SBidding = false;
+
     @Override
     public boolean startBiddingRequest(Context context, Map<String, Object> serverExtra, Map<String, Object> localExtra, ATBiddingListener biddingListener) {
 
@@ -77,16 +78,19 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
 
             @Override
             public void onAdCacheSuccess() {
-                if (isC2SBidding) {
-                    if (mBiddingListener != null) {
-                        if (splashAD != null) {
-                            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(splashAD), null);
-                        } else {
-                            notifyATLoadFail("", "AdGain SplashAD had been destroy.");
+                try {
+                    if (isC2SBidding) {
+                        if (mBiddingListener != null) {
+                            if (splashAD != null) {
+                                mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(splashAD), null);
+                            } else {
+                                notifyATLoadFail("", "AdGain SplashAD had been destroy.");
+                            }
                         }
+                    } else if (mLoadListener != null) {
+                        mLoadListener.onAdCacheLoaded();
                     }
-                } else if (mLoadListener != null) {
-                    mLoadListener.onAdCacheLoaded();
+                } catch (Exception e) {
                 }
             }
 
@@ -149,7 +153,6 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
 
     @Override
     public boolean isAdReady() {
-
         if (splashAD != null) {
             return splashAD.isReady();
         }
@@ -168,7 +171,7 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
             return;
         }
 
-        if ( splashAD != null) {
+        if (splashAD != null) {
 
             container.post(() -> {
 

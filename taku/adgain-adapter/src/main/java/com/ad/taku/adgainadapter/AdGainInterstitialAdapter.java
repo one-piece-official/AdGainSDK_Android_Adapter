@@ -99,12 +99,15 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
 
             @Override
             public void onInterstitialAdLoadCached() {
-                if (isC2SBidding) {
-                    if (mBiddingListener != null) {
-                        mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mGTInterstitialAd), null);
+                try {
+                    if (isC2SBidding) {
+                        if (mBiddingListener != null) {
+                            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mGTInterstitialAd), null);
+                        }
+                    } else if (mLoadListener != null) {
+                        mLoadListener.onAdCacheLoaded();
                     }
-                } else if (mLoadListener != null) {
-                    mLoadListener.onAdCacheLoaded();
+                } catch (Exception e) {
                 }
             }
 
@@ -154,6 +157,7 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
 
     @Override
     public boolean isAdReady() {
+//        Log.d(TAG, "isAdReady " + (mGTInterstitialAd != null ? mGTInterstitialAd.isReady()   : "null"));
         if (mGTInterstitialAd != null) {
             return mGTInterstitialAd.isReady();
         }

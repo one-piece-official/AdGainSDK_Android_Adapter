@@ -93,12 +93,15 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
             @Override
             public void onRewardAdLoadCached() {
                 Log.d(TAG, "onRewardAdLoadCached");
-                if (isC2SBidding) {
-                    if (mBiddingListener != null) {
-                        mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mRewardVideoAD), null);
+                try {
+                    if (isC2SBidding) {
+                        if (mBiddingListener != null) {
+                            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mRewardVideoAD), null);
+                        }
+                    } else if (mLoadListener != null) {
+                        mLoadListener.onAdCacheLoaded();
                     }
-                } else if (mLoadListener != null) {
-                    mLoadListener.onAdCacheLoaded();
+                } catch (Exception e) {
                 }
             }
 
@@ -183,7 +186,7 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
 
     @Override
     public boolean isAdReady() {
-        Log.d(TAG, "isAdReady " + mRewardVideoAD.isReady());
+//        Log.d(TAG, "isAdReady " + (mRewardVideoAD != null ? mRewardVideoAD.isReady()   : "null"));
         if (mRewardVideoAD != null) {
             return mRewardVideoAD.isReady();
         }

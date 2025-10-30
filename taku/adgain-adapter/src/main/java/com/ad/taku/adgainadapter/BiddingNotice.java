@@ -88,8 +88,12 @@ public class BiddingNotice implements ATBiddingNotice {
     }
 
     public static ATBiddingResult biddingResult(com.adgain.sdk.x bidding) {
-        BiddingNotice biddingNotice = new BiddingNotice(bidding);
-        return ATBiddingResult.success(bidding.getBidPrice(), System.currentTimeMillis() + "", biddingNotice, ATAdConst.CURRENCY.RMB_CENT);
+        if (bidding != null) {
+            BiddingNotice biddingNotice = new BiddingNotice(bidding);
+            return ATBiddingResult.success(bidding.getBidPrice(), System.currentTimeMillis() + "", biddingNotice, ATAdConst.CURRENCY.RMB_CENT);
+        } else {
+            return ATBiddingResult.fail("bidding is null");
+        }
     }
 
 }
