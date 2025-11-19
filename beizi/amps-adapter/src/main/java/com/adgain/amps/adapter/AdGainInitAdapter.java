@@ -23,6 +23,7 @@ public class AdGainInitAdapter extends AMPSChannelInitMediation {
     private volatile boolean isInit = false;
     public static final String errorCode = "-100";
     public static final String errorMsg = "No Ad And AdGainError 为null ";
+    public static boolean isCanShake = true;
 
     public synchronized static AdGainInitAdapter getInstance() {
         if (null == instance) {
@@ -86,8 +87,8 @@ public class AdGainInitAdapter extends AMPSChannelInitMediation {
     private CustomController getController(AMPSInitAdapterConfig params) {
         CustomController controller = null;
         try {
-            if (params.getPrivacyConfig() != null) {
-                AMPSPrivacyConfig config = params.getPrivacyConfig();
+            AMPSPrivacyConfig config = params.getPrivacyConfig();
+            if (config != null) {
                 controller = new CustomController() {
                     @Override
                     public boolean canReadLocation() {
@@ -139,7 +140,9 @@ public class AdGainInitAdapter extends AMPSChannelInitMediation {
                     public String getOaid() {
                         return config.getDevOaid();
                     }
+
                 };
+                isCanShake = config.isCanUseShakeAd();
             } else {
                 controller = new CustomController() {
                     @Override

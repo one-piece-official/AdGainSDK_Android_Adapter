@@ -11,6 +11,8 @@ import com.adgain.sdk.api.AdRequest;
 import com.adgain.sdk.api.SplashAd;
 import com.adgain.sdk.api.SplashAdListener;
 
+import java.util.HashMap;
+
 import xyz.adscope.amps.ad.splash.adapter.AMPSSplashAdAdapterListener;
 import xyz.adscope.amps.ad.splash.adapter.AMPSSplashAdapter;
 import xyz.adscope.amps.base.AMPSBidResult;
@@ -90,11 +92,14 @@ public class AdGainSplashAdapter extends AMPSSplashAdapter {
     private void loadSplashAd(Context context) {
         AMPSLogUtil.d(AMPSConstants.AMPS_LOG_TAG,
                 " AdGain start loadSplashAd  spaceId:" + mSpaceId);
+        HashMap<String, Object> extras = new HashMap<>();
+        extras.put("disableShake", !AdGainInitAdapter.isCanShake);// true 就是用户关闭摇一摇
         // 创建ad请求
         AdRequest adRequest = new AdRequest.Builder()
                 .setCodeId(mSpaceId) // 广告位ID
                 .setHeight(viewHeightDp)
                 .setWidth(viewWidthDp)
+                .setExtOption(extras)
                 .build();
         // 创建开屏AD API对象，监听回调在这里设置,5 * 1000为请求广告超时时间
         splashAd = new SplashAd(adRequest, new SplashAdListener() {

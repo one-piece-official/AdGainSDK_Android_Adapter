@@ -11,6 +11,8 @@ import com.adgain.sdk.api.AdRequest;
 import com.adgain.sdk.api.InterstitialAd;
 import com.adgain.sdk.api.InterstitialAdListener;
 
+import java.util.HashMap;
+
 import xyz.adscope.amps.ad.interstitial.adapter.AMPSInterstitialAdAdapterListener;
 import xyz.adscope.amps.ad.interstitial.adapter.AMPSInterstitialAdapter;
 import xyz.adscope.amps.base.AMPSBidResult;
@@ -82,7 +84,11 @@ public class AdGainInterstitialAdapter extends AMPSInterstitialAdapter {
 
     private void loadInterstitialAd(Context context) {
         AMPSLogUtil.d(AMPSConstants.AMPS_LOG_TAG, " AdGain start loadInterstitialAd  spaceId:" + mSpaceId);
-        AdRequest adRequest = new AdRequest.Builder().setCodeId(mSpaceId).build();
+        HashMap<String, Object> extras = new HashMap<>();
+        extras.put("disableShake", !AdGainInitAdapter.isCanShake);
+        AdRequest adRequest = new AdRequest.Builder().
+                setCodeId(mSpaceId).setExtOption(extras)
+                .build();
         mInterstitialAd = new InterstitialAd(adRequest, new InterstitialAdListener() {
             @Override
             public void onInterstitialAdLoadError(com.adgain.sdk.api.AdError adError) {

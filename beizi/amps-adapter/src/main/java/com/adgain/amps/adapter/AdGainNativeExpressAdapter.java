@@ -15,6 +15,7 @@ import com.adgain.sdk.api.NativeUnifiedAd;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import xyz.adscope.amps.ad.nativead.adapter.AMPSNativeAdAdapterListener;
@@ -108,7 +109,10 @@ public class AdGainNativeExpressAdapter extends AMPSNativeAdapter {
     private void loadNativeExpressAd(Context context) {
         AMPSLogUtil.d(AMPSConstants.AMPS_LOG_TAG,
                 " AdGain start loadNativeExpressAd  spaceId:" + mSpaceId);
+        HashMap<String, Object> extras = new HashMap<>();
+        extras.put("disableShake", !AdGainInitAdapter.isCanShake);
         AdRequest adRequest = new AdRequest.Builder()
+                .setExtOption(extras)
                 .setCodeId(mSpaceId) // 设置广告位id
                 .build();
         nativeAd = new NativeUnifiedAd(adRequest, new NativeAdLoadListener() {

@@ -85,6 +85,8 @@ public class AdGainRewardAdapter extends AMPSRewardAdapter {
 
     private void loadInterstitialAd(Context context) {
         AMPSLogUtil.d(AMPSConstants.AMPS_LOG_TAG, " AdGain start loadReward  spaceId:" + mSpaceId);
+//        HashMap<String, Object> extras = new HashMap<>();
+//        extras.put("disableShake", !AdGainInitAdapter.isCanShake);
         AdRequest adRequest = new AdRequest.Builder().setCodeId(mSpaceId).build();
         mRewardAd = new RewardAd(adRequest, new RewardAdListener() {
             @Override
