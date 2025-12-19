@@ -52,12 +52,14 @@ public class AdGainInterAdapter extends MediationCustomInterstitialLoader implem
 
                 @Override
                 public void onInterstitialAdLoadCached() {
-                    Log.d(TAG, "onInterstitialAdLoadCached: ");
-                    if (!isClientBidding())
-                        callLoadSuccess();
-                    else
-                        callLoadSuccess(mInterstitialAd != null ? mInterstitialAd.getBidPrice() : 0);  // 单位 分 ecpm
-
+                    try {
+                        Log.d(TAG, "onInterstitialAdLoadCached: ");
+                        if (!isClientBidding())
+                            callLoadSuccess();
+                        else
+                            callLoadSuccess(mInterstitialAd != null ? mInterstitialAd.getBidPrice() : 0);  // 单位 分 ecpm
+                    } catch (Exception e) {
+                    }
                 }
 
                 @Override

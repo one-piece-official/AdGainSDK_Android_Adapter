@@ -96,9 +96,12 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
 
     @Override
     public void onRewardAdLoadSuccess() {
-        if (rewardAd != null && getBiddingType() == WMConstants.AD_TYPE_CLIENT_BIDING) {
-            BidPrice bidPrice = new BidPrice(String.valueOf(rewardAd.getBidPrice()));
-            callLoadBiddingSuccess(bidPrice);
+        try {
+            if (rewardAd != null && getBiddingType() == WMConstants.AD_TYPE_CLIENT_BIDING) {
+                BidPrice bidPrice = new BidPrice(String.valueOf(rewardAd.getBidPrice()));
+                callLoadBiddingSuccess(bidPrice);
+            }
+        } catch (Exception e) {
         }
     }
 
@@ -134,8 +137,8 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
 
     @Override
     public void onRewardAdLoadError(AdError adError) {
-        if (adError!=null) {
-            Log.d(TAG, "onRewardAdLoadError " + adError.getErrorCode() +" msg " + adError.getMessage());
+        if (adError != null) {
+            Log.d(TAG, "onRewardAdLoadError " + adError.getErrorCode() + " msg " + adError.getMessage());
             callLoadFail(new WMAdapterError(adError.getErrorCode(), adError.getMessage()));
         }
     }

@@ -88,12 +88,15 @@ public class AdGainCustomerInterstitial extends WMCustomInterstitialAdapter impl
 
     @Override
     public void onInterstitialAdLoadSuccess() {
-        Log.d(TAG, "onInterstitialAdLoadSuccess: bidtype: " + getBiddingType());
-        if (interstitialAd != null && getBiddingType() == WMConstants.AD_TYPE_CLIENT_BIDING) {
-            BidPrice bidPrice = new BidPrice(String.valueOf(interstitialAd.getBidPrice()));
-            callLoadBiddingSuccess(bidPrice);
+        try {
+            Log.d(TAG, "onInterstitialAdLoadSuccess: bidtype: " + getBiddingType());
+            if (interstitialAd != null && getBiddingType() == WMConstants.AD_TYPE_CLIENT_BIDING) {
+                BidPrice bidPrice = new BidPrice(String.valueOf(interstitialAd.getBidPrice()));
+                callLoadBiddingSuccess(bidPrice);
+            }
+            callLoadSuccess();
+        } catch (Exception e) {
         }
-        callLoadSuccess();
     }
 
     @Override
@@ -123,7 +126,7 @@ public class AdGainCustomerInterstitial extends WMCustomInterstitialAdapter impl
 
     @Override
     public void onInterstitialAdShowError(AdError error) {
-        if (error!=null) {
+        if (error != null) {
             Log.d(TAG, "onRewardAdLoadError " + error.getErrorCode() + " msg " + error.getMessage());
             callVideoAdPlayError(new WMAdapterError(error.getErrorCode(), error.getMessage()));
         }

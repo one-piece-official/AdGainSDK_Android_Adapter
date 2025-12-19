@@ -54,11 +54,14 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
 
                 @Override
                 public void onRewardAdLoadCached() {
-                    Log.d(TAG, "onRewardAdLoadCached: " + getBiddingType());
-                    if (!isClientBidding())
-                        callAdVideoCache();
-                    else
-                        callLoadSuccess(mRewardAd != null ? mRewardAd.getBidPrice() : 0);  // 单位 分
+                    try {
+                        Log.d(TAG, "onRewardAdLoadCached: " + getBiddingType());
+                        if (!isClientBidding())
+                            callAdVideoCache();
+                        else
+                            callLoadSuccess(mRewardAd != null ? mRewardAd.getBidPrice() : 0);  // 单位 分
+                    } catch (Exception e) {
+                    }
                 }
 
                 @Override

@@ -36,17 +36,20 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
 
                 @Override
                 public void onAdLoadSuccess() {
-                    Log.d(TAG, "splash ----------onAdLoadSuccess---------- " + splashAd.getBidPrice() + " " + isClientBidding());
-                    if (isClientBidding()) {
-                        callLoadSuccess(splashAd.getBidPrice());  // 单位分
-                    }
                 }
 
                 @Override
                 public void onAdCacheSuccess() {
-                    Log.d(TAG, "splash ----------onAdCacheSuccess----------");
-                    if (!isClientBidding()) {
-                        callLoadSuccess();
+                    try {
+                        Log.d(TAG, "splash ----------onAdCacheSuccess---------- " + splashAd.getBidPrice() + " " + isClientBidding());
+                        if (isClientBidding()) {
+                            callLoadSuccess(splashAd.getBidPrice());  // 单位分
+                        }
+                        if (!isClientBidding()) {
+                            callLoadSuccess();
+                        }
+                    }catch (Exception e){
+
                     }
                 }
 

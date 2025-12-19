@@ -87,10 +87,13 @@ public class AdGainCustomerSplash extends WMCustomSplashAdapter implements Splas
 
     @Override
     public void onAdLoadSuccess() {
-        Log.d(TAG, "onSplashAdLoadSuccess: bidtype: " + getBiddingType());
-        if (splashAd != null && getBiddingType() == WMConstants.AD_TYPE_CLIENT_BIDING) {
-            BidPrice bidPrice = new BidPrice(String.valueOf(splashAd.getBidPrice()));
-            callLoadBiddingSuccess(bidPrice);
+        try {
+            Log.d(TAG, "onSplashAdLoadSuccess: bidtype: " + getBiddingType());
+            if (splashAd != null && getBiddingType() == WMConstants.AD_TYPE_CLIENT_BIDING) {
+                BidPrice bidPrice = new BidPrice(String.valueOf(splashAd.getBidPrice()));
+                callLoadBiddingSuccess(bidPrice);
+            }
+        } catch (Exception e) {
         }
     }
 

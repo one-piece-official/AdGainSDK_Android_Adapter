@@ -72,9 +72,14 @@ public class AdGainBannerAdapter extends MediationCustomBannerLoader implements 
 
     @Override
     public void onBannerAdLoadSuccess() {
-        Log.d(TAG, "onBannerAdLoadSuccess " + isClientBidding());
-        if (isClientBidding() && mBannerAd != null)
-            callLoadSuccess(mBannerAd.getBidPrice());  // 单位 分
+        try {
+            Log.d(TAG, "onBannerAdLoadSuccess " + isClientBidding());
+            if (isClientBidding())
+                callLoadSuccess(mBannerAd.getBidPrice());  // 单位 分
+            else
+                callLoadSuccess();
+        } catch (Exception e) {
+        }
     }
 
     @Override

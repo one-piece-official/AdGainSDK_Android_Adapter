@@ -72,14 +72,13 @@ public class AdGainCustomerNative extends WMCustomNativeAdapter implements Nativ
 
     @Override
     public void notifyBiddingResult(boolean isWin, String price, Map<String, Object> referBidInfo) {
-        Log.d(TAG, "notifyBiddingResult: " + isWin + " " + price + " " + referBidInfo);
+//        Log.d(TAG, "notifyBiddingResult: " + isWin + " " + price + " " + referBidInfo);
         super.notifyBiddingResult(isWin, price, referBidInfo);
         NativeUnifiedAd ad = nativeUnifiedAd;
-        Log.d(TAG, "notifyBiddingResult: win: " + isWin + " price: " + price + " refer: " + referBidInfo + " ad: " + ad);
+//        Log.d(TAG, "notifyBiddingResult: win: " + isWin + " price: " + price + " refer: " + referBidInfo + " ad: " + ad);
         if (null == ad) {
             return;
         }
-
         if (isWin) {
             // 竞价成功
             ad.sendWinNotification(AdGainAdapterUtil.getBidingWinNoticeParam(price, referBidInfo));
@@ -109,24 +108,28 @@ public class AdGainCustomerNative extends WMCustomNativeAdapter implements Nativ
 
     @Override
     public void onAdLoad(List<NativeAdData> adDataList) {
-        Log.d(TAG, "onAdLoad: " + " dataList: " + adDataList);
-        if (getBiddingType() == WMConstants.AD_TYPE_CLIENT_BIDING) {
-            if (adDataList != null && !adDataList.isEmpty()) {
-                NativeAdData adData = adDataList.get(0);
-                // biding
-                if (adData != null) {
-                    BidPrice bidPrice = new BidPrice(String.valueOf(adData.getPrice()));
-                    Log.d(TAG, "invoke callLoadBiddingSuccess: " + bidPrice);
-                    callLoadBiddingSuccess(bidPrice);
+        try {
+            Log.d(TAG, "onAdLoad: " + " dataList: " + adDataList);
+            if (getBiddingType() == WMConstants.AD_TYPE_CLIENT_BIDING) {
+                if (adDataList != null && !adDataList.isEmpty()) {
+                    NativeAdData adData = adDataList.get(0);
+                    // biding
+                    if (adData != null) {
+                        BidPrice bidPrice = new BidPrice(String.valueOf(adData.getPrice()));
+                        Log.d(TAG, "invoke callLoadBiddingSuccess: " + bidPrice);
+                        callLoadBiddingSuccess(bidPrice);
+                    }
                 }
             }
-        }
-        if (adDataList != null) {
-            for (NativeAdData data : adDataList) {
-                wmNativeAdDataList.add(new AdGainNativeAdData(data, this));
+            if (adDataList != null) {
+                for (NativeAdData data : adDataList) {
+                    wmNativeAdDataList.add(new AdGainNativeAdData(data, this));
+                }
             }
+            Log.d(TAG, "invoke callLoadSuccess");
+            callLoadSuccess(wmNativeAdDataList);
+        } catch (Exception e) {
+
         }
-        Log.d(TAG, "invoke callLoadSuccess");
-        callLoadSuccess(wmNativeAdDataList);
     }
 }
