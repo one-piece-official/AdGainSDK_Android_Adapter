@@ -87,10 +87,10 @@ public class BiddingNotice implements ATBiddingNotice {
         return gtBaseAd != null ? gtBaseAd.toString() : "";
     }
 
-    public static ATBiddingResult biddingResult(com.adgain.sdk.x bidding) {
+    public static ATBiddingResult biddingResult(IBidding bidding, double price) {
         if (bidding != null) {
             BiddingNotice biddingNotice = new BiddingNotice(bidding);
-            return ATBiddingResult.success(bidding.getBidPrice(), System.currentTimeMillis() + "", biddingNotice, ATAdConst.CURRENCY.RMB_CENT);
+            return ATBiddingResult.success(price, System.currentTimeMillis() + "", biddingNotice, ATAdConst.CURRENCY.RMB_CENT);
         } else {
             return ATBiddingResult.fail("bidding is null");
         }

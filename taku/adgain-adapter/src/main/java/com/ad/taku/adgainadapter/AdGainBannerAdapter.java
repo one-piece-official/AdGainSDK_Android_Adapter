@@ -115,7 +115,7 @@ public class AdGainBannerAdapter extends CustomBannerAdapter implements BannerAd
     public void onBannerAdLoadSuccess() {
         Log.d(TAG, "banner  onBannerAdLoadSuccess ");
         if (mBiddingListener != null) {
-            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mBannerAd), null);
+            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mBannerAd, mBannerAd.getBidPrice()), null);
         } else if (mLoadListener != null) {
             mLoadListener.onAdCacheLoaded();
         }

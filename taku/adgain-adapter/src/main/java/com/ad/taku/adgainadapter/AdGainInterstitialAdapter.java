@@ -102,7 +102,7 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
                 try {
                     if (isC2SBidding) {
                         if (mBiddingListener != null) {
-                            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mGTInterstitialAd), null);
+                            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mGTInterstitialAd, mGTInterstitialAd.getBidPrice()), null);
                         }
                     } else if (mLoadListener != null) {
                         mLoadListener.onAdCacheLoaded();

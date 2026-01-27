@@ -96,7 +96,7 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
                 try {
                     if (isC2SBidding) {
                         if (mBiddingListener != null) {
-                            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mRewardVideoAD), null);
+                            mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(mRewardVideoAD, mRewardVideoAD.getBidPrice()), null);
                         }
                     } else if (mLoadListener != null) {
                         mLoadListener.onAdCacheLoaded();

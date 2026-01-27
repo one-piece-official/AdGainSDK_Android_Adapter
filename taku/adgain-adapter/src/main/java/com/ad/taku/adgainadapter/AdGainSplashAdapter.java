@@ -82,7 +82,7 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
                     if (isC2SBidding) {
                         if (mBiddingListener != null) {
                             if (splashAD != null) {
-                                mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(splashAD), null);
+                                mBiddingListener.onC2SBiddingResultWithCache(BiddingNotice.biddingResult(splashAD, splashAD.getBidPrice()), null);
                             } else {
                                 notifyATLoadFail("", "AdGain SplashAD had been destroy.");
                             }
