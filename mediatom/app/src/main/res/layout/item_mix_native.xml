@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/media_container"
+            android:layout_width="160dp"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="6dp"
+            android:orientation="vertical">
+
+            <!--title-->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="#666666"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="标题标题阿斯顿发送到发送阿斯顿发斯蒂芬爱上大放送" />
+
+            <!--description-->
+            <TextView
+                android:id="@+id/des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:minLines="1"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                tools:text="阿斯顿发送到发双方都下是否味儿阿斯顿发斯蒂芬阿斯顿发送到阿斯顿发送到发双方都下是否味儿阿斯顿发斯蒂芬阿斯顿发送到" />
+
+            <TextView
+                android:id="@+id/btn_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/selector_btn_download"
+                android:paddingLeft="10dp"
+                android:paddingTop="4dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="4dp"
+                android:text="点击下载"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#D00000"
+                android:textSize="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:src="@mipmap/yd_sdk_ad_dialog_close" />
+
+    <ImageView
+        android:id="@+id/iv_ad_logo"
+        android:layout_width="40dp"
+        android:layout_height="14dp"
+        android:layout_gravity="bottom|end"
+        android:scaleType="fitCenter" />
+</FrameLayout>

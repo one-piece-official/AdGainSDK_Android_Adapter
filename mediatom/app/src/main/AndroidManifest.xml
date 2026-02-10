@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.xm.demo">
+
+    <uses-sdk tools:overrideLibrary="com.bun.miitmdid" />
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/yd_demo_network_config"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:name,android:networkSecurityConfig,android:allowBackup">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".unit.ads.AdsIndexActivity"
+            android:configChanges="keyboardHidden"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name=".unit.ads.SplashActivity" />
+        <activity android:name=".unit.ads.SplashActivity2" />
+        <activity android:name=".unit.ads.BannerActivity" />
+        <activity android:name=".unit.ads.InterstitialActivity" />
+        <activity android:name=".unit.ads.MixNativeActivity" />
+        <activity android:name=".unit.ads.FlowRecyclerViewActivity" />
+        <activity android:name=".unit.ads.RewardVideoActivity" />
+    </application>
+
+</manifest>
