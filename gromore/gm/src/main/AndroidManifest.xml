@@ -158,10 +158,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <provider
-            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
-            android:authorities="${applicationId}.TTMultiProvider"
-            android:exported="false" />
 
         <activity android:name=".activity.AllExpressAdActivity" /> <!-- Sample AdMob App ID: ca-app-pub-3000639232404350~2520092023 -->
         <activity android:name=".activity.NativeExpressOnePointFiveRecyclerActivity" />

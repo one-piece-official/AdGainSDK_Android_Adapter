@@ -308,9 +308,6 @@ public class NativeExpressOnePointFiveRecyclerActivity extends Activity {
             if (ad == null) {
                 return ITEM_VIEW_TYPE_NORMAL;
 
-            } else if (TTAdSdk.isOnePointFiveAdType(ad)) {
-                return ITEM_VIEW_TYPE_ONEPOINTFIVE;
-
             } else if (ad.getImageMode() == TTAdConstant.IMAGE_MODE_SMALL_IMG) {
                 return ITEM_VIEW_TYPE_SMALL_PIC_AD;
 

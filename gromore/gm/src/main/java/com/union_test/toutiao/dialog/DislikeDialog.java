@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bytedance.sdk.openadsdk.DislikeInfo;
 import com.bytedance.sdk.openadsdk.FilterWord;
 import com.bytedance.sdk.openadsdk.TTDislikeDialogAbstract;
-import com.bytedance.sdk.openadsdk.dislike.TTDislikeListView;
 import com.union_test.toutiao.R;
 
 import java.util.ArrayList;
@@ -56,23 +55,6 @@ public class DislikeDialog extends TTDislikeDialogAbstract {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TTDislikeListView listView = (TTDislikeListView) findViewById(R.id.lv_dislike_custom);
-        listView.setAdapter(new MyDislikeAdapter());
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DislikeDialog.this.dismiss();
-
-                if (mOnDislikeItemClick != null) {
-                    FilterWord word = null;
-                    try {
-                        word = (FilterWord) parent.getAdapter().getItem(position);
-                    } catch (Throwable ignore) {
-                    }
-                    mOnDislikeItemClick.onItemClick(word);
-                }
-            }
-        });
     }
 
     @Override

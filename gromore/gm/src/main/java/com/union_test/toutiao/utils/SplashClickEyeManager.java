@@ -63,15 +63,6 @@ public class SplashClickEyeManager {
 
     private void initCSJSplashClickEyeViewData(Context context) {
         int deviceWidth = Math.min(UIUtils.getScreenHeightInPx(context),UIUtils.getScreenWidthInPx(context));
-        if (mCSJSplashAdRef != null && mCSJSplashAdRef.get() != null && mCSJSplashAdRef.get().getSplashClickEyeSizeToDp() != null) {
-            //使用推荐的点睛宽高
-            mClickEyeViewWidth = UIUtils.dp2px(context, mCSJSplashAdRef.get().getSplashClickEyeSizeToDp()[0]);
-            mClickEyeViewHeight = UIUtils.dp2px(context, mCSJSplashAdRef.get().getSplashClickEyeSizeToDp()[1]);
-        } else {
-            //默认的点睛宽高
-            mClickEyeViewWidth = Math.round(deviceWidth * 0.3f);//屏幕宽度的30%，之前使用PxUtils.dpToPx(context, 90);
-            mClickEyeViewHeight = Math.round(mClickEyeViewWidth * 16 / 9.0f);//根据宽度计算高度，之前使用PxUtils.dpToPx(context, 160);
-        }
     }
 
     public void setCSJSplashInfo(CSJSplashAd splashAd, View splashView, View decorView) {

@@ -213,12 +213,6 @@ public class RewardVideoActivity extends Activity implements View.OnClickListene
             //【可选】再看一个展示时的生命状态监听
 
             PlayAgainAdLifeListener playAgainAdLifeListener = new PlayAgainAdLifeListener(mActivity);
-            mAd.setRewardPlayAgainInteractionListener(playAgainAdLifeListener);
-            //【可选】再看一个入口与奖励显示控制器
-
-            PlayAgainController playAgainController = new PlayAgainController();
-            playAgainController.setPlayAgainAdLifeListener(playAgainAdLifeListener);
-            mAd.setRewardPlayAgainController(playAgainController);
             //【可选】监听下载状态
             mAd.setDownloadListener(new DownloadStatusListener());
         }
@@ -417,30 +411,7 @@ public class RewardVideoActivity extends Activity implements View.OnClickListene
         }
     }
 
-    /**
-     * 【可选】再看广告入口控制器
-     */
 
-    private static class PlayAgainController implements TTRewardVideoAd.RewardAdPlayAgainController {
-
-        private PlayAgainAdLifeListener mPlayAgainAdLifeListener;
-
-        public void setPlayAgainAdLifeListener(PlayAgainAdLifeListener playAgainAdLifeListener) {
-            mPlayAgainAdLifeListener = playAgainAdLifeListener;
-        }
-
-        @Override
-        public void getPlayAgainCondition(int nextPlayAgainCount, Callback callback) {
-            Bundle bundle = new Bundle();
-            bundle.putBoolean(KEY_PLAY_AGAIN_ALLOW, true);
-            bundle.putString(KEY_PLAY_AGAIN_REWARD_NAME, "金币");
-            bundle.putString(KEY_PLAY_AGAIN_REWARD_AMOUNT, nextPlayAgainCount + "");
-            if (mPlayAgainAdLifeListener != null) {
-                mPlayAgainAdLifeListener.setNextPlayAgainCount(nextPlayAgainCount);
-            }
-            callback.onConditionReturn(bundle);
-        }
-    }
 
     /**
      * 【可选】下载状态监听器

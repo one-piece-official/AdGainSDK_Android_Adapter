@@ -11,15 +11,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bytedance.sdk.openadsdk.CSJSplashAd;
-import com.bytedance.sdk.openadsdk.downloadnew.core.ExitInstallListener;
-import com.bytedance.tools.util.ToolsUtil;
+
+import com.bytedance.sdk.openadsdk.ExitInstallListener;
 import com.union_test.toutiao.R;
 import com.union_test.toutiao.config.TTAdManagerHolder;
 import com.union_test.toutiao.utils.SplashCardManager;
 import com.union_test.toutiao.utils.SplashClickEyeManager;
-import com.union_test.toutiao.utils.UIUtils;
 
-import java.lang.ref.SoftReference;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -111,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void animationEnd() {
-                splashAd.showSplashClickEyeView((ViewGroup) findViewById(android.R.id.content));
                 splashClickEyeManager.clearCSJSplashStaticData();
             }
         });
@@ -132,47 +130,8 @@ public class MainActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         }
 
-        CSJSplashAd splashAd = splashClickEyeManager.getCSJSplashAd();
-        SplashClickEyeListener splashClickEyeListener = new SplashClickEyeListener(splashClickEyeView, splashAd);
-        if (splashAd != null) {
-            splashAd.setSplashClickEyeListener(splashClickEyeListener);
-        }
     }
 
-    static class SplashClickEyeListener implements CSJSplashAd.SplashClickEyeListener {
-
-        private SoftReference<View> mSplashView;
-
-        private SoftReference<CSJSplashAd> mSplashAd;
-
-
-        public SplashClickEyeListener(View splashView, CSJSplashAd splashAd) {
-            mSplashView = new SoftReference<>(splashView);
-            mSplashAd = new SoftReference<>(splashAd);
-        }
-
-        @Override
-        public void onSplashClickEyeReadyToShow(CSJSplashAd bean) {
-
-        }
-
-        @Override
-        public void onSplashClickEyeClick() {
-
-        }
-
-        @Override
-        public void onSplashClickEyeClose() {
-            //接收点击关闭按钮的事件将开屏点睛移除。
-            if (mSplashView != null && mSplashView.get() != null) {
-                mSplashView.get().setVisibility(View.GONE);
-                UIUtils.removeFromParent(mSplashView.get());
-                mSplashView = null;
-                mSplashAd = null;
-            }
-            SplashClickEyeManager.getInstance().clearCSJSplashStaticData();
-        }
-    }
 }
 
 

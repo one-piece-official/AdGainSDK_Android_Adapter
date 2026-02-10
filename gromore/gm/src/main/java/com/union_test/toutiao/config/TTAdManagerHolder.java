@@ -138,7 +138,7 @@ public class TTAdManagerHolder {
                     @Nullable
                     @Override
                     public String getDevOaid() {
-                        return "oaid_gm_test";
+                        return "";
                     }
                 })
 //                .customController(getTTCustomController()) //如果您需要设置隐私策略请参考该api
