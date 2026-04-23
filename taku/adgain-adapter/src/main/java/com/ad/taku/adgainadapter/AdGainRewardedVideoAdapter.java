@@ -76,9 +76,14 @@ public class AdGainRewardedVideoAdapter extends CustomRewardVideoAdapter {
 
     private void loadGTRewardVideo(Context context, Map<String, Object> serverExtra) {
 
+        HashMap<String,Object> map = new HashMap<>();
+        if (!isC2SBidding) {
+            map.put("isBid", "0");
+        }
         AdRequest adRequest = new AdRequest.Builder()
                 .setCodeId(codeId)
                 .setAppId(mAppId)
+                .setExtOption(map)
                 .setBidFloor(AdGainInitManager.getBidFloor(serverExtra))
                 .build();
 

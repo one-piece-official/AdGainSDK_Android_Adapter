@@ -66,8 +66,13 @@ public class AdGainSplashAdapter extends CustomSplashAdapter {
     }
 
     private void startLoadAd(final Context context, Map<String, Object> serverExtra) {
+        HashMap<String, Object> map = new HashMap<>();
+        if (!isC2SBidding) {
+            map.put("isBid", "0");
+        }
         AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId)
                 .setAppId(mAppId)
+                .setExtOption(map)
                 .setBidFloor(AdGainInitManager.getBidFloor(serverExtra)).build();
         splashAD = new SplashAd(adRequest, new SplashAdListener() {
             @Override

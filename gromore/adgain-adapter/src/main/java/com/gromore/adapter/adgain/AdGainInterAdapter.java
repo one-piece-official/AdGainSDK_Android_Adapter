@@ -103,9 +103,14 @@ public class AdGainInterAdapter extends MediationCustomInterstitialLoader implem
             };
 
             AdGainCustomerInit.setWXAppId(serviceConfig.getCustomAdapterJson());
+            HashMap<String, Object> map = new HashMap();
+            if (!isClientBidding()) {
+                map.put("isBid", "0");
+            }
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(serviceConfig.getADNNetworkSlotId())
                     .setAppId(AdGainCustomerInit.appId)
+                    .setExtOption(map)
                     .setBidFloor(AdGainCustomerInit.getBidFloor(serviceConfig.getCustomAdapterJson()))
                     .build();
 

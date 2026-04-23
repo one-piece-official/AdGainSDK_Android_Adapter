@@ -36,7 +36,9 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
             Log.e(TAG, "load custom native ad----- " + serviceConfig.getADNNetworkSlotId() + "  " + getBiddingType());
             AdGainCustomerInit.setWXAppId(serviceConfig.getCustomAdapterJson());
             Map<String, Object> options = new HashMap<>();
-
+            if (!isClientBidding()) {
+                options.put("isBid", "0");
+            }
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(serviceConfig.getADNNetworkSlotId())
                     .setAppId(AdGainCustomerInit.appId)
@@ -54,7 +56,7 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
                                 AdGainNativeAdRender nativeAd = new AdGainNativeAdRender(context, feedAd, nativeUnifiedAd);
                                 nativeAd.setExpressAd(feedAd.getFeedView() != null);
                                 ecpm = feedAd.getPrice();
-                                Log.e(TAG, "ecpm:" + ecpm);
+                                Log.i(TAG, "ecpm:" + ecpm);
                                 if (isClientBidding())
                                     nativeAd.setBiddingPrice(ecpm); //回传竞价广告价格
                                 tempList.add(nativeAd);

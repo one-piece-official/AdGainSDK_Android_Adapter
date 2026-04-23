@@ -74,8 +74,13 @@ public class AdGainInterstitialAdapter extends CustomInterstitialAdapter {
     }
 
     private void loadInterstitial(Map<String, Object> serverExtra, Map<String, Object> localExtra) {
+        HashMap<String,Object> map = new HashMap<>();
+        if (!isC2SBidding) {
+            map.put("isBid", "0");
+        }
         AdRequest adRequest = new AdRequest.Builder().setCodeId(codeId)
                 .setAppId(mAppId)
+                .setExtOption(map)
                 .setBidFloor(AdGainInitManager.getBidFloor(serverExtra)).build();
 
         mGTInterstitialAd = new InterstitialAd(adRequest, new InterstitialAdListener() {

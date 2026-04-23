@@ -46,7 +46,7 @@ public class BiddingNotice implements ATBiddingNotice {
 
         Log.d(TAG, "\n\n  notifyBidLoss adType = " + getAdType() + "     lossCode = " + lossCode + "   winPrice = " + winPrice + "  extra = " + extra);
 
-        Map<String, Object> map = new HashMap<>(4);
+        Map<String, Object> map = new HashMap<>();
         map.put(IBidding.WIN_PRICE, winPrice);
         map.put(IBidding.THIRD_MEDIATION, "taku");
         if (gtBaseAd != null) {

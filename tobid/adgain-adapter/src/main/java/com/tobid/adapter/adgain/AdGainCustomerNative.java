@@ -35,15 +35,19 @@ public class AdGainCustomerNative extends WMCustomNativeAdapter implements Nativ
 //            if (null == nativeUnifiedAd) {
             String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
 //            String appId = (String) serverExtra.get(WMConstants.APP_ID);
-            Map<String, Object> options = new HashMap<>(serverExtra);
-            if (localExtra != null) {
-                options.putAll(localExtra);
-            }
 //                codeId = codeId + "t";
+            if (localExtra == null) {
+                localExtra = new HashMap<>();
+            }
+            if (getBiddingType() != WMConstants.AD_TYPE_CLIENT_BIDING) {
+                localExtra.put("isBid", "0");
+            } else {
+                localExtra.remove("isBid");
+            }
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(codeId)
                     .setBidFloor(AdGainAdapterUtil.getBidFloor(this, serverExtra))
-                    .setExtOption(options)
+                    .setExtOption(localExtra)
                     .setAppId(AdGainCustomerProxy.appId)
                     .build();
             nativeUnifiedAd = new NativeUnifiedAd(adRequest, this);

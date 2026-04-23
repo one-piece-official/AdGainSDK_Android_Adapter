@@ -16,6 +16,8 @@ import com.bytedance.sdk.openadsdk.mediation.MediationConstant;
 import com.bytedance.sdk.openadsdk.mediation.bridge.custom.splash.MediationCustomSplashLoader;
 import com.bytedance.sdk.openadsdk.mediation.custom.MediationCustomServiceConfig;
 
+import java.util.HashMap;
+
 public class AdGainSplashAdapter extends MediationCustomSplashLoader implements GMBiddingUtil.NotifyBiddingListener {
     private SplashAd splashAd;
 
@@ -48,18 +50,15 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
                         if (!isClientBidding()) {
                             callLoadSuccess();
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
                 }
 
                 @Override
                 public void onSplashAdLoadFail(AdError error) {
-                    Log.d(TAG, "----------onSplashAdLoadFail----------" + error.toString());
                     if (error != null) {
-                        Log.i(TAG, "onSplashAdLoadFail errorCode = " + error.getErrorCode() + " errorMessage = " + error.getMessage());
                         callLoadFail(error.getErrorCode(), error.getMessage());
-
                     } else {
                         callLoadFail(40000, "no ad");
                     }
@@ -93,9 +92,14 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
 
             };
             GMBiddingUtil.addNotifyBiddingListener(this);
+            HashMap<String, Object> map = new HashMap();
+            if (!isClientBidding()) {
+                map.put("isBid", "0");
+            }
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(serviceConfig.getADNNetworkSlotId())
                     .setAppId(AdGainCustomerInit.appId)
+                    .setExtOption(map)
                     .setBidFloor(AdGainCustomerInit.getBidFloor(serviceConfig.getCustomAdapterJson()))
                     .build();
             splashAd = new SplashAd(adRequest, mSplashAdListener);

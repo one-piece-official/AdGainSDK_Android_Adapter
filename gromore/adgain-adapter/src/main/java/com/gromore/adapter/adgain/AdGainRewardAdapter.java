@@ -146,7 +146,9 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
             };
 
             Map<String, Object> options = new HashMap<>();
-
+            if (!isClientBidding()) {
+                options.put("isBid", "0");
+            }
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(serviceConfig.getADNNetworkSlotId())     // 广推广告位 从商务获取
                     .setExtOption(options)

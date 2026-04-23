@@ -39,6 +39,14 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
             // 这个数值来自sigmob后台广告位ID的配置
             String codeId = (String) serverExtra.get(WMConstants.PLACEMENT_ID);
 //            String appId = (String) serverExtra.get(WMConstants.APP_ID);
+            if (localExtra == null) {
+                localExtra = new HashMap<>();
+            }
+            if (getBiddingType() != WMConstants.AD_TYPE_CLIENT_BIDING) {
+                localExtra.put("isBid", "0");
+            } else {
+                localExtra.remove("isBid");
+            }
             AdRequest adRequest = new AdRequest.Builder()
                     .setCodeId(codeId)
                     .setExtOption(localExtra)

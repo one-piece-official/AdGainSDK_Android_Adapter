@@ -96,10 +96,13 @@ public class AdGainNativeAdapter extends CustomNativeAdapter {
     }
 
     private void loadRenderingAd(final Context context, Map<String, Object> serverExtra) {
-        AdRequest adRequest = new AdRequest
-                .Builder()
+        HashMap<String, Object> map = new HashMap<>();
+        if (!isC2SBidding) {
+            map.put("isBid", "0");
+        }
+        AdRequest adRequest = new AdRequest.Builder()
                 .setCodeId(codeId)
-                .setAppId(mAppId)
+                .setAppId(mAppId).setExtOption(map)
                 .setBidFloor(AdGainInitManager.getBidFloor(serverExtra))
                 .build();
 
