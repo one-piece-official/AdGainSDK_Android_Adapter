@@ -2,11 +2,8 @@ package com.gromore.adapter.adgain;
 
 import android.content.Context;
 import android.location.Location;
-import android.os.Environment;
-import android.os.FileObserver;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.SparseArray;
 
 import com.adgain.sdk.AdGainSdk;
 import com.adgain.sdk.BuildConfig;
