@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="jiguang_colorPrimary">#1b78c8</color>
+    <color name="jiguang_colorPrimaryDark">#1b78c8</color>
+    <color name="jiguang_colorAccent">#1b78c8</color>
+    <color name="jiguang_pageColorPrimary">#141B82D2</color>
+    <color name="jiguang_textColorGray">#AAAAAA</color>
+    <color name="jiguang_textColorBlack">#333333</color>
+</resources>

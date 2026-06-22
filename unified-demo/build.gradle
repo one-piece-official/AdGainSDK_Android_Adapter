@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+def key = rootProject.ext.keystoreConfig
+def v = rootProject.ext.version
+
+android {
+    compileSdkVersion 33
+
+    signingConfigs {
+        sign {
+            keyAlias key.keyAlias
+            keyPassword key.keyPassword
+            storeFile key.storeFile
+            storePassword key.storePassword
+        }
+    }
+
+    defaultConfig {
+        applicationId 'com.adgain.adapter'
+        minSdkVersion v.minV
+        targetSdkVersion v.targetV
+        versionCode 1
+        versionName '1.0'
+        multiDexEnabled true
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64', 'armeabi'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.sign
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            signingConfig signingConfigs.sign
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    flatDir {
+        dirs '../tobid/libs',
+                '../tobid/libs/AdNetworks/adgain',
+                '../taku/libs',
+                '../gromore/libs',
+                '../gromore/libs/adapter',
+                '../jiguang/libs',
+                '../mediatom/libs',
+                '../admate/admate-lib/libs',
+                '../adnetworklibs/pangle'
+    }
+}
+
+dependencies {
+    implementation project(':tobid:tobid-lib')
+    implementation project(':tobid:adgain-adapter')
+    implementation project(':taku:taku-lib')
+    implementation project(':gromore:gromore-lib')
+    implementation project(':beizi:beizi-lib')
+    implementation project(':jiguang:jiguang-lib')
+    implementation project(':mediatom:mediatom-lib')
+    implementation project(':mediatom:adgain-adapter')
+    implementation project(':admate:admate-lib')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: '../tobid/libs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: '../jiguang/libs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: '../mediatom/libs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: '../adnetworklibs/baidu')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: '../adnetworklibs/oaid')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: '../adgainlibs')
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+}

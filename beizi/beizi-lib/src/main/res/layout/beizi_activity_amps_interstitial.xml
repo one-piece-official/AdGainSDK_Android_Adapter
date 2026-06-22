@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/amps_interstitial_ad_load_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/beizi_teal_200"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="请求插屏广告" />
+
+    <TextView
+        android:id="@+id/amps_interstitial_ad_show_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/beizi_teal_200"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="显示插屏广告" />
+
+</LinearLayout>

@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../tobid/libs')
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../libs')
     compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
     compileOnly "com.github.bumptech.glide:glide:4.9.0"
 }

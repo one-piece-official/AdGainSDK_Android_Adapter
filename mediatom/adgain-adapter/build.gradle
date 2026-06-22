@@ -29,7 +29,7 @@ android {
 
 
 dependencies {
-    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../app/libs')
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../libs')
     compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 
 }

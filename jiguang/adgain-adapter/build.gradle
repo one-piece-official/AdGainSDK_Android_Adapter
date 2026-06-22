@@ -1,11 +1,12 @@
 apply plugin: 'com.android.library'
+def v = rootProject.ext.version
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion v.comV
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 29
+        minSdkVersion v.minV
+        targetSdkVersion v.targetV
         versionCode 202410151
         versionName "4.603.1473.10151"
     }

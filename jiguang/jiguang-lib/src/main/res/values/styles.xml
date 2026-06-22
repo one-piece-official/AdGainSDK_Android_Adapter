@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="JiguangAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/jiguang_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/jiguang_colorPrimaryDark</item>
+        <item name="colorAccent">@color/jiguang_colorAccent</item>
+    </style>
+
+    <style name="JiguangAppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/jiguang_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/jiguang_colorPrimaryDark</item>
+        <item name="colorAccent">@color/jiguang_colorAccent</item>
+    </style>
+
+    <style name="JiguangSplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/jiguang_shape_splash</item>
+    </style>
+
+    <style name="JiguangNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+</resources>

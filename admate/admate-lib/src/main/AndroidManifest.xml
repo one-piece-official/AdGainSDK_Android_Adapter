@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-sdk tools:overrideLibrary="com.dingmouren.layoutmanagergroup,com.bun.miitmdid" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:hardwareAccelerated="true"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true">
+
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+
+        <activity android:name=".adactivity.feed.MixRecyclerActivity" />
+        <activity android:name=".adactivity.feed.NativeRecyclerListSelectActivity" />
+        <activity android:name=".adactivity.splash.PrepareSplashActivity" />
+        <activity android:name=".adactivity.paster.PasterActivity" />
+        <activity android:name=".adactivity.rewardvideo.RewardVideoActivity" />
+        <activity android:name=".adactivity.interstitial.InterstitialAdActivity" />
+        <activity android:name=".adactivity.interstitial.InterstitialAdNewActivity" />
+        <activity android:name=".adactivity.fullscreenvideo.FullScreenVideoActivity" />
+        <activity
+            android:name=".adactivity.splash.SplashActivity"
+            android:theme="@style/AdMateNoActionBarFullScreen" />
+        <activity android:name=".adactivity.splash.SplashAdActivity" />
+        <activity android:name=".adactivity.banner.BannerAdActivity" />
+        <activity
+            android:name=".adactivity.InitActivity"
+            android:theme="@style/AdMateAppTheme" />
+        <activity
+            android:name=".adactivity.MainActivity"
+            android:theme="@style/AdMateAppTheme" />
+
+        <provider
+            android:name="com.meishu.sdk.core.service.MeishuFileProvider"
+            android:authorities="${applicationId}.MeishuFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/admate_meishu_file_path" />
+        </provider>
+
+        <provider
+            android:name="com.byazt.tc.TTMultiProvider"
+            android:authorities="${applicationId}.TTMultiProvider"
+            android:exported="false" />
+
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false" />
+        <activity
+            android:name="com.qq.e.ads.ADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name="com.qq.e.ads.PortraitADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.qq.e.ads.LandscapeADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensorLandscape" />
+
+    </application>
+</manifest>

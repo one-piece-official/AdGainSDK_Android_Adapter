@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".adactivity.MainActivity">
+
+
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="vertical"
+            android:fadingEdge="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bannerAD"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Banner广告" />
+
+                <Button
+                    android:id="@+id/slashAD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="开屏广告" />
+
+                <Button
+                    android:id="@+id/interstitialAD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="插屏广告" />
+
+                <Button
+                    android:id="@+id/pasterAD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="视频贴片广告" />
+
+                <Button
+                    android:id="@+id/nativeRecyclerAD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="原生信息流广告" />
+
+                <Button
+                    android:id="@+id/videoFeedAd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="视频流广告" />
+
+                <Button
+                    android:id="@+id/rewardVideoAd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="激励视频" />
+
+                <Button
+                    android:id="@+id/full_screen_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="全屏视频" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/cb1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="禁用加速度"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <CheckBox
+                        android:id="@+id/cb2"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="禁用重力"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <CheckBox
+                        android:id="@+id/cb3"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="禁用陀螺仪"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/personRecomend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="禁用个性化推荐"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_weight="0"
+                            android:layout_width="@dimen/admate_main_info_item_left"
+                            android:layout_height="wrap_content"
+                            android:text="DEMO" />
+                        <TextView
+                            android:layout_weight="0"
+                            android:layout_width="@dimen/admate_main_info_item_center"
+                            android:layout_height="wrap_content"
+                            android:text="：" />
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/main_info_demo" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_weight="0"
+                            android:layout_width="@dimen/admate_main_info_item_left"
+                            android:layout_height="wrap_content"
+                            android:text="msadSDK" />
+                        <TextView
+                            android:layout_weight="0"
+                            android:layout_width="@dimen/admate_main_info_item_center"
+                            android:layout_height="wrap_content"
+                            android:text="：" />
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/main_info_meishu" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_weight="0"
+                            android:layout_width="@dimen/admate_main_info_item_left"
+                            android:layout_height="wrap_content"
+                            android:text="OAID" />
+                        <TextView
+                            android:layout_weight="0"
+                            android:layout_width="@dimen/admate_main_info_item_center"
+                            android:layout_height="wrap_content"
+                            android:text="：" />
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/main_info_oaid" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_weight="0"
+                            android:layout_width="@dimen/admate_main_info_item_left"
+                            android:layout_height="wrap_content"
+                            android:text="包名" />
+                        <TextView
+                            android:layout_weight="0"
+                            android:layout_width="@dimen/admate_main_info_item_center"
+                            android:layout_height="wrap_content"
+                            android:text="：" />
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/main_info_package" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/finishingTouchContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>
+

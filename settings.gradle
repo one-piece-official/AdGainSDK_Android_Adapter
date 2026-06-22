@@ -1,8 +1,10 @@
-include 'taku:taku', 'taku:adgain-adapter'
-include 'tobid:tobid', 'tobid:adgain-adapter'
-include 'gromore:gm', 'gromore:adgain-adapter'
+include 'taku:taku', 'taku:taku-lib', 'taku:adgain-adapter'
+include 'tobid:tobid', 'tobid:tobid-lib', 'tobid:adgain-adapter'
+include 'gromore:gm', 'gromore:gromore-lib', 'gromore:adgain-adapter'
 
-include 'jiguang:jiguang', 'jiguang:adgain-adapter'
+include 'jiguang:jiguang', 'jiguang:jiguang-lib', 'jiguang:adgain-adapter'
 
-include 'beizi:app', 'beizi:amps-adapter'
-include 'mediatom:app', 'mediatom:adgain-adapter'
+include 'beizi:app', 'beizi:beizi-lib', 'beizi:amps-adapter'
+include 'mediatom:app', 'mediatom:mediatom-lib', 'mediatom:adgain-adapter'
+include 'admate:app2.5', 'admate:admate-lib'
+include 'unified-demo'

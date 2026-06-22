@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/activity_draw_video_item_ad_container"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="#80000000">
+        <TextView
+            android:id="@+id/tv_ad_title"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_ad_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#ffffff"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:background="@drawable/mediatom_selector_btn_download"/>
+
+    </RelativeLayout>
+</RelativeLayout>

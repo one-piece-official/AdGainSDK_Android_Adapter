@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.xm.demo">
+
+    <uses-sdk tools:overrideLibrary="com.bun.miitmdid" />
+
+    <application>
+        <activity
+            android:name=".unit.ads.AdsIndexActivity"
+            android:configChanges="keyboardHidden"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name=".unit.ads.SplashActivity" />
+        <activity android:name=".unit.ads.SplashActivity2" />
+        <activity android:name=".unit.ads.BannerActivity" />
+        <activity android:name=".unit.ads.InterstitialActivity" />
+        <activity android:name=".unit.ads.MixNativeActivity" />
+        <activity android:name=".unit.ads.FlowRecyclerViewActivity" />
+        <activity android:name=".unit.ads.RewardVideoActivity" />
+    </application>
+
+</manifest>

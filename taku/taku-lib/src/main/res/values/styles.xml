@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="TakuAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/taku_color_primary</item>
+        <item name="colorPrimaryDark">@color/taku_color_primary_dark</item>
+        <item name="colorAccent">@color/taku_color_accent</item>
+    </style>
+
+<!--    Only for GDT-->
+    <style name="TakuDownloadConfirmDialogFullScreen" parent="android:Theme.Dialog">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="TakuDownloadConfirmDialogAnimationUp">
+        <item name="android:windowEnterAnimation">@anim/taku_download_confirm_dialog_slide_up</item>
+    </style>
+    <style name="TakuDownloadConfirmDialogAnimationRight">
+        <item name="android:windowEnterAnimation">@anim/taku_download_confirm_dialog_slide_right_in</item>
+    </style>
+
+    <style name="taku_style_btn">
+        <item name="android:textSize">@dimen/anythink_title_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/taku_selector_btn</item>
+        <item name="android:background">@drawable/taku_selector_bg_1</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+
+    <style name="taku_style_checkBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/anythink_666666</item>
+        <item name="colorControlActivated">@color/anythink_0042DF</item>
+    </style>
+
+
+</resources>

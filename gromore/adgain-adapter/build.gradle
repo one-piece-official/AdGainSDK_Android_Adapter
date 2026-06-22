@@ -40,8 +40,7 @@ android {
 }
 
 dependencies {
-    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../gm/libs/open_ad_sdk_7.3.0.7.aar')
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../libs')
+    compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adnetworklibs/pangle')
     compileOnly fileTree(include: ['*.jar', '*.aar'], dir: '../../adgainlibs')
 }
-
-

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.adgain.unified">
+
+    <uses-sdk tools:overrideLibrary="com.bun.miitmdid,com.unity3d.ads,com.tapsdk.tapad,
+        xyz.adscope.amps,xyz.adscope.ad,xyz.adscope.amps.adapter.asnp,
+        com.beizi.ad,com.beizi.fusion,xyz.adscope.amps.adapter.bz,
+        com.qq.e,xyz.adscope.amps.adapter.gdt,
+        com.kwad.sdk,xyz.adscope.amps.adapter.ks,
+        com.bytedance.pangle,xyz.adscope.amps.adapter.csj,xyz.adscope.amps.adapter.gm,
+        com.baidu.mobads.proxy,xyz.adscope.amps.adapter.bd,
+        com.sigmob.sdk,com.czhj.sdk.common,xyz.adscope.amps.adapter.sigmob,
+        com.qumeng.advlib,xyz.adscope.amps.adapter.qm,
+        com.jd.ad.sdk.multi,xyz.adscope.amps.adapter.jd,
+        com.huawei.hms.ads,xyz.adscope.amps.adapter.hw" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".UnifiedApplication"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/tobid_network_security_config"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <activity
+            android:name=".UnifiedAdTypeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".UnifiedAdLoadActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".UnifiedPlatformActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -40,7 +40,7 @@ public class InitSDkActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_init_sdk);
+        setContentView(R.layout.taku_activity_init_sdk);
 
         initView();
         initListener();

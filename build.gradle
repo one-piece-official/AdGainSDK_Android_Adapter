@@ -50,6 +50,10 @@ allprojects {
     repositories {
         mavenCentral()
         google()
+        maven { url 'https://artifact.bytedance.com/repository/AwemeOpenSDK' }
+        flatDir {
+            dirs "${rootProject.projectDir}/adnetworklibs/baidu"
+        }
     }
 }
 
