@@ -105,6 +105,7 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
             splashAd = new SplashAd(adRequest, mSplashAdListener);
             splashAd.loadAd();
         } catch (Exception e) {
+            GMBiddingUtil.removeNotifyBiddingListener(this);
             callLoadFail(40000, "Exception " + e.getMessage());
             Log.d(TAG, "splash load: error = " + Log.getStackTraceString(e));
         }

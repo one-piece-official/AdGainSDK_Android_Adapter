@@ -40,7 +40,7 @@ public class AdGainNativeAdRender extends MediationCustomNativeAd {
     public AdGainNativeAdRender(Context context, NativeAdData adData, NativeUnifiedAd nativeAd) {
         try {
 
-            mContext = context;
+            mContext = context != null ? context.getApplicationContext() : null;
             mNativeAD = nativeAd;
             mNativeUnifiedADData = adData;
 
@@ -141,7 +141,8 @@ public class AdGainNativeAdRender extends MediationCustomNativeAd {
                 mNativeUnifiedADData.bindViewForInteraction(container, clickViews, eventListener);
 
                 if (mNativeUnifiedADData.getAdPatternType() == NativeAdPatternType.NATIVE_VIDEO_AD) {
-                    AdgainNativeAdMediaView gdtMediaView = new AdgainNativeAdMediaView(mContext);
+                    Context mediaViewContext = mContext != null ? mContext : container.getContext().getApplicationContext();
+                    AdgainNativeAdMediaView gdtMediaView = new AdgainNativeAdMediaView(mediaViewContext);
                     container.addView(gdtMediaView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
                     mNativeUnifiedADData.bindMediaView(gdtMediaView, new NativeAdData.NativeAdMediaListener() {
@@ -200,6 +201,9 @@ public class AdGainNativeAdRender extends MediationCustomNativeAd {
             mNativeUnifiedADData.destroy();
             mNativeUnifiedADData = null;
         }
+        mNativeAD = null;
+        mContext = null;
+        container = null;
     }
 
 

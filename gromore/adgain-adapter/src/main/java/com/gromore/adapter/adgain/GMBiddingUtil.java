@@ -31,11 +31,11 @@ public class GMBiddingUtil {
     }
 
     protected static void addNotifyBiddingListener(NotifyBiddingListener listener) {
-        if (listeners != null) listeners.add(listener);
+        if (listener != null && !listeners.contains(listener)) listeners.add(listener);
     }
 
     protected static void removeNotifyBiddingListener(NotifyBiddingListener listener) {
-        if (listeners != null) listeners.remove(listener);
+        if (listener != null) listeners.remove(listener);
     }
 
     protected static void clearNotifyBiddingListener() {

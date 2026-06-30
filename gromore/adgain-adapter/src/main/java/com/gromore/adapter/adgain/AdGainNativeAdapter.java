@@ -24,11 +24,13 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
     private static final String TAG = AdGainCustomerInit.TAG;
     private NativeUnifiedAd nativeUnifiedAd;
     private int ecpm;
+    private boolean biddingListenerAdded;
 
     @Override
     public void load(Context context, AdSlot adSlot, MediationCustomServiceConfig serviceConfig) {
 
         try {
+            Context appContext = context != null ? context.getApplicationContext() : null;
             if (serviceConfig == null) {
                 callLoadFail(40000, "serviceConfig 为 null");
                 return;
@@ -53,7 +55,7 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
                         if (list != null && !list.isEmpty()) {
                             List<AdGainNativeAdRender> tempList = new ArrayList<>();
                             for (NativeAdData feedAd : list) {
-                                AdGainNativeAdRender nativeAd = new AdGainNativeAdRender(context, feedAd, nativeUnifiedAd);
+                                AdGainNativeAdRender nativeAd = new AdGainNativeAdRender(appContext, feedAd, nativeUnifiedAd);
                                 nativeAd.setExpressAd(feedAd.getFeedView() != null);
                                 ecpm = feedAd.getPrice();
                                 Log.i(TAG, "ecpm:" + ecpm);
@@ -78,8 +80,10 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
                 }
             });
             GMBiddingUtil.addNotifyBiddingListener(this);
+            biddingListenerAdded = true;
             nativeUnifiedAd.loadAd();
         } catch (Exception e) {
+            removeBiddingListener();
             callLoadFail(40000, "Exception " + e.getMessage());
         }
     }
@@ -91,7 +95,11 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        GMBiddingUtil.removeNotifyBiddingListener(this);
+        removeBiddingListener();
+        if (nativeUnifiedAd != null) {
+            nativeUnifiedAd.destroyAd();
+            nativeUnifiedAd = null;
+        }
     }
 
     @Override
@@ -104,6 +112,14 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
                 }
             } catch (Exception e) {
             }
+        }
+        removeBiddingListener();
+    }
+
+    private void removeBiddingListener() {
+        if (biddingListenerAdded) {
+            GMBiddingUtil.removeNotifyBiddingListener(this);
+            biddingListenerAdded = false;
         }
     }
 }

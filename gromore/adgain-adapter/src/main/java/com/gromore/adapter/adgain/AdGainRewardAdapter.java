@@ -29,6 +29,7 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
     private static final String TAG = AdGainCustomerInit.TAG;
 
     private RewardAd mRewardAd;
+    private boolean biddingListenerAdded;
 
     public AdGainRewardAdapter() {
         Log.d(TAG, "AdGainRewardAdapter: constructor");
@@ -95,7 +96,7 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
 
                 @Override
                 public void onRewardAdLoadError(AdError error) {
-                    Log.d(TAG, "reward AdLoadError: " + error.getMessage());
+                    Log.d(TAG, "reward AdLoadError: " + (error != null ? error.getMessage() : "no ad"));
 
                     if (error != null) {
                         Log.i(TAG, "onRewardAdLoadError errorCode = " + error.getErrorCode() + " errorMessage = " + error.getMessage());
@@ -115,27 +116,7 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
                 public void onRewardVerify() {
                     Log.i(TAG, "onReward");
 
-                    callRewardVideoRewardVerify(new MediationRewardItem() {
-                        @Override
-                        public boolean rewardVerify() {
-                            return true;
-                        }
-
-                        @Override
-                        public float getAmount() {
-                            return 1;
-                        }
-
-                        @Override
-                        public String getRewardName() {
-                            return "";
-                        }
-
-                        @Override
-                        public Map<String, Object> getCustomData() {
-                            return new HashMap<>();
-                        }
-                    });
+                    callRewardVideoRewardVerify(new AdGainRewardItem());
                 }
 
                 @Override
@@ -158,10 +139,12 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
 
             mRewardAd = new RewardAd(adRequest, rewardAdListener);
             GMBiddingUtil.addNotifyBiddingListener(this);
+            biddingListenerAdded = true;
 
             mRewardAd.loadAd();
 
         } catch (Exception e) {
+            removeBiddingListener();
             callLoadFail(40000, "Exception " + e.getMessage());
             Log.d(TAG, "reward load: error = " + Log.getStackTraceString(e));
         }
@@ -190,7 +173,7 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
     @Override
     public void onDestroy() {
         super.onDestroy();
-        GMBiddingUtil.removeNotifyBiddingListener(this);
+        removeBiddingListener();
         Log.i(TAG, "reward onDestroy");
         if (mRewardAd != null) {
             mRewardAd.destroyAd();
@@ -203,6 +186,36 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
         if (object instanceof TTRewardVideoAd && mRewardAd != null && mRewardAd.isReady()) {// 有填充才进行竞败回传
             String ecpm = ((TTRewardVideoAd) object).getMediationManager().getShowEcpm().getEcpm();
             GMBiddingUtil.adgainNotifyLoss(mRewardAd, ecpm, this);
+        }
+        removeBiddingListener();
+    }
+
+    private void removeBiddingListener() {
+        if (biddingListenerAdded) {
+            GMBiddingUtil.removeNotifyBiddingListener(this);
+            biddingListenerAdded = false;
+        }
+    }
+
+    private static class AdGainRewardItem implements MediationRewardItem {
+        @Override
+        public boolean rewardVerify() {
+            return true;
+        }
+
+        @Override
+        public float getAmount() {
+            return 1;
+        }
+
+        @Override
+        public String getRewardName() {
+            return "";
+        }
+
+        @Override
+        public Map<String, Object> getCustomData() {
+            return new HashMap<>();
         }
     }
 }
