@@ -103,8 +103,8 @@ public class AdGainInitManager extends ATInitMediation {
 
             Map<String, Object> customData = new HashMap<>();
             customData.put(IBidding.THIRD_MEDIATION, "taku");
-
-            Log.d(TAG, "initSDK: real start  appId = " + appId);
+            customData.put("thirdSdkVer", ATSDK.getSDKVersionName());
+//            Log.d(TAG, "initSDK: real start  appId = " + appId);
             AdGainSdk.getInstance().init(context, new AdGainSdkConfig.Builder()
                     .appId(appId)         //必填
                     .showLog(false)    // 是否展示 adsdk 日志
@@ -121,7 +121,6 @@ public class AdGainInitManager extends ATInitMediation {
                         public void onSuccess() {
                             // 初始化成功 后 再加载广告
                             Log.d(TAG, "initSDK ------------onSuccess----------- ");
-
                             mHasInit = true;
                             callbackResult(true, null, null);
                         }
