@@ -42,6 +42,7 @@ public class AdGainCustomerProxy extends WMCustomAdapterProxy {
             String gtAdAppId = joCustom.getString(SERVER_EXTRA_CUSTOM_APP_ID);
             HashMap<String, Object> customData = new HashMap<>();
             customData.put(IBidding.THIRD_MEDIATION, "tobid");
+            customData.put("thirdSdkVer", WindMillAd.getVersion());
             WMAdConfig adConfig = WindMillAd.sharedAds().getAdConfig();
             if (adConfig != null && adConfig.getCustomController() != null) {
                 controller = adConfig.getCustomController();

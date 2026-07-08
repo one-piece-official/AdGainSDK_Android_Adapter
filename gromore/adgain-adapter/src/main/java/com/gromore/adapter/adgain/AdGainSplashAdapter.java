@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 public class AdGainSplashAdapter extends MediationCustomSplashLoader implements GMBiddingUtil.NotifyBiddingListener {
     private SplashAd splashAd;
+    private boolean biddingListenerAdded;
 
     public AdGainSplashAdapter() {
     }
@@ -92,6 +93,7 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
 
             };
             GMBiddingUtil.addNotifyBiddingListener(this);
+            biddingListenerAdded = true;
             HashMap<String, Object> map = new HashMap();
             if (!isClientBidding()) {
                 map.put("isBid", "0");
@@ -105,7 +107,7 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
             splashAd = new SplashAd(adRequest, mSplashAdListener);
             splashAd.loadAd();
         } catch (Exception e) {
-            GMBiddingUtil.removeNotifyBiddingListener(this);
+            removeBiddingListener();
             callLoadFail(40000, "Exception " + e.getMessage());
             Log.d(TAG, "splash load: error = " + Log.getStackTraceString(e));
         }
@@ -142,12 +144,13 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        GMBiddingUtil.removeNotifyBiddingListener(this);
+        removeBiddingListener();
         Log.i(TAG, "splash onDestroy");
         if (splashAd != null) {
             splashAd.destroyAd();
             splashAd = null;
         }
+        mGmAdLoader = null;
     }
 
     @Override
@@ -155,6 +158,13 @@ public class AdGainSplashAdapter extends MediationCustomSplashLoader implements 
         if (object instanceof CSJSplashAd && splashAd != null && splashAd.isReady()) {// 有填充才进行竞败回传
             String ecpm = ((CSJSplashAd) object).getMediationManager().getShowEcpm().getEcpm();
             GMBiddingUtil.adgainNotifyLoss(splashAd, ecpm, this);
+        }
+    }
+
+    private void removeBiddingListener() {
+        if (biddingListenerAdded) {
+            GMBiddingUtil.removeNotifyBiddingListener(this);
+            biddingListenerAdded = false;
         }
     }
 

@@ -15,7 +15,6 @@ import com.adgain.sdk.api.SplashAd;
 import com.adgain.sdk.api.SplashAdListener;
 import com.anythink.core.api.ATAdConst;
 import com.anythink.core.api.ATBiddingListener;
-import com.anythink.core.api.ATBiddingResult;
 import com.anythink.core.api.ATInitMediation;
 import com.anythink.core.api.ErrorCode;
 import com.anythink.core.api.MediationInitCallback;

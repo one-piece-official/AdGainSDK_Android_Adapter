@@ -15,6 +15,7 @@ import com.windmill.sdk.base.WMAdapterError;
 import com.windmill.sdk.custom.WMCustomBannerAdapter;
 import com.windmill.sdk.models.BidPrice;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class AdGainCustomerBanner extends WMCustomBannerAdapter implements BannerAdListener {
@@ -116,6 +117,20 @@ public class AdGainCustomerBanner extends WMCustomBannerAdapter implements Banne
     @Override
     public void onBannerAdShowError(AdError adError) {
         Log.d(TAG, "onBannerAdShowError " + adError);
-
     }
+
+    @Override
+    public Object getChannelObject() {
+        return mBannerAd;
+    }
+
+    @Override
+    public Map<String, Object> getMediaExtraOption() {
+        HashMap<String, Object> map = new HashMap<>();
+        if (mBannerAd != null) {
+            map.put(WMConstants.REQUEST_ID, mBannerAd.getExtraInfo().get("loadId"));
+        }
+        return map;
+    }
+
 }

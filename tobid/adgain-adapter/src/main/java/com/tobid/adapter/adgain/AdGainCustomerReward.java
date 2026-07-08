@@ -164,4 +164,18 @@ public class AdGainCustomerReward extends WMCustomRewardAdapter implements Rewar
     @Override
     public void onAdSkip() {
     }
+
+    @Override
+    public Object getChannelObject() {
+        return rewardAd;
+    }
+
+    @Override
+    public Map<String, Object> getMediaExtraOption() {
+        HashMap<String, Object> map = new HashMap<>();
+        if (rewardAd != null) {
+            map.put(WMConstants.REQUEST_ID, rewardAd.getExtraInfo().get("loadId"));
+        }
+        return map;
+    }
 }

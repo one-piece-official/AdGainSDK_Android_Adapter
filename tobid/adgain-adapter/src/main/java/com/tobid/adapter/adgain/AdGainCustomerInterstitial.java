@@ -139,4 +139,19 @@ public class AdGainCustomerInterstitial extends WMCustomInterstitialAdapter impl
             callVideoAdPlayError(new WMAdapterError(error.getErrorCode(), error.getMessage()));
         }
     }
+
+    @Override
+    public Object getChannelObject() {
+        return interstitialAd;
+    }
+
+    @Override
+    public Map<String, Object> getMediaExtraOption() {
+        HashMap<String, Object> map = new HashMap<>();
+        if (interstitialAd != null) {
+            map.put(WMConstants.REQUEST_ID, interstitialAd.getExtraInfo().get("loadId"));
+        }
+        return map;
+    }
+
 }

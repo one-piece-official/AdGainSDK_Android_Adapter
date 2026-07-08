@@ -143,4 +143,24 @@ public class AdGainCustomerSplash extends WMCustomSplashAdapter implements Splas
             callSplashAdClosed();
         }
     }
+
+    @Override
+    public Object getChannelObject() {
+        return splashAd;
+    }
+
+    @Override
+    public Map<String, Object> getNetworkOption() {
+        return super.getNetworkOption();
+    }
+
+    @Override
+    public Map<String, Object> getMediaExtraOption() {
+        HashMap<String, Object> map = new HashMap<>();
+        if (splashAd != null) {
+            map.put(WMConstants.REQUEST_ID, splashAd.getExtraInfo().get("loadId"));
+        }
+        return map;
+    }
+
 }

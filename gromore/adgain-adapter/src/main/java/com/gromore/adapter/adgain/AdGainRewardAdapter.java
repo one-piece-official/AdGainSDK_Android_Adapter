@@ -179,6 +179,7 @@ public class AdGainRewardAdapter extends MediationCustomRewardVideoLoader implem
             mRewardAd.destroyAd();
             mRewardAd = null;
         }
+        mGmAdLoader = null;
     }
 
     @Override

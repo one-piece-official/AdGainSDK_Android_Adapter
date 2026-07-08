@@ -1,18 +1,15 @@
 package com.gromore.adapter.adgain;
 
-import android.util.Log;
-
 import com.adgain.sdk.api.IBidding;
 
-import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GMBiddingUtil {
 
-    private static final CopyOnWriteArrayList<NotifyBiddingListener> listeners = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<WeakReference<NotifyBiddingListener>> listeners = new CopyOnWriteArrayList<>();
 
     protected interface NotifyBiddingListener {
         void notifyBiddingResult(Object object);
@@ -22,7 +19,13 @@ public class GMBiddingUtil {
     public static void gmNotifyLoss(Object object) {
         try {
             for (int i = 0; i < listeners.size(); i++) {
-                listeners.get(i).notifyBiddingResult(object);
+                WeakReference<NotifyBiddingListener> reference = listeners.get(i);
+                NotifyBiddingListener listener = reference.get();
+                if (listener != null) {
+                    listener.notifyBiddingResult(object);
+                } else {
+                    listeners.remove(reference);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,11 +34,18 @@ public class GMBiddingUtil {
     }
 
     protected static void addNotifyBiddingListener(NotifyBiddingListener listener) {
-        if (listener != null && !listeners.contains(listener)) listeners.add(listener);
+        if (listener == null || containsNotifyBiddingListener(listener)) return;
+        listeners.add(new WeakReference<>(listener));
     }
 
     protected static void removeNotifyBiddingListener(NotifyBiddingListener listener) {
-        if (listener != null) listeners.remove(listener);
+        if (listener == null) return;
+        for (WeakReference<NotifyBiddingListener> reference : listeners) {
+            NotifyBiddingListener item = reference.get();
+            if (item == null || item == listener) {
+                listeners.remove(reference);
+            }
+        }
     }
 
     protected static void clearNotifyBiddingListener() {
@@ -52,5 +62,18 @@ public class GMBiddingUtil {
             gtBaseAd.sendLossNotification(map);
         }
         GMBiddingUtil.removeNotifyBiddingListener(listener);
+    }
+
+    private static boolean containsNotifyBiddingListener(NotifyBiddingListener listener) {
+        boolean contains = false;
+        for (WeakReference<NotifyBiddingListener> reference : listeners) {
+            NotifyBiddingListener item = reference.get();
+            if (item == null) {
+                listeners.remove(reference);
+            } else if (item == listener) {
+                contains = true;
+            }
+        }
+        return contains;
     }
 }

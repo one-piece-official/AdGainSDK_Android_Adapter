@@ -10,6 +10,7 @@ import com.adgain.sdk.BuildConfig;
 import com.adgain.sdk.api.AdGainSdkConfig;
 import com.adgain.sdk.api.CustomController;
 import com.adgain.sdk.api.InitCallback;
+import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.mediation.bridge.custom.MediationCustomInitLoader;
 import com.bytedance.sdk.openadsdk.mediation.bridge.valueset.MediationInitConfig;
 import com.bytedance.sdk.openadsdk.mediation.custom.MediationCustomInitConfig;
@@ -38,6 +39,7 @@ public class AdGainCustomerInit extends MediationCustomInitLoader {
         try {
             Map<String, Object> customData = new HashMap<>();
             customData.put("thirdMediation", "gm");
+            customData.put("thirdSdkVer", TTAdSdk.getAdManager().getSDKVersion());
             try {
                 Object controlleClz = map.get("custom_controller");
                 Class clazz = controlleClz.getClass();

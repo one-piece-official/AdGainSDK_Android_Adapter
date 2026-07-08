@@ -136,4 +136,19 @@ public class AdGainCustomerNative extends WMCustomNativeAdapter implements Nativ
 
         }
     }
+
+    @Override
+    public Object getChannelObject() {
+        return nativeUnifiedAd;
+    }
+
+    @Override
+    public Map<String, Object> getMediaExtraOption() {
+        HashMap<String, Object> map = new HashMap<>();
+        if (nativeUnifiedAd != null) {
+            map.put(WMConstants.REQUEST_ID, nativeUnifiedAd.getExtraInfo().get("loadId"));
+        }
+        return map;
+    }
+
 }

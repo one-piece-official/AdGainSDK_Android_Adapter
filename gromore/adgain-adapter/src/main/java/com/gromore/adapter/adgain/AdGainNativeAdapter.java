@@ -100,6 +100,7 @@ public class AdGainNativeAdapter extends MediationCustomNativeLoader implements 
             nativeUnifiedAd.destroyAd();
             nativeUnifiedAd = null;
         }
+        mGmAdLoader = null;
     }
 
     @Override
