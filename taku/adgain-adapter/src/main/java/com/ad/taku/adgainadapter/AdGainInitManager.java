@@ -42,6 +42,10 @@ public class AdGainInitManager extends ATInitMediation {
         mIsIniting = new AtomicBoolean(false);
     }
 
+    public int getAdapterBridgeVersion() {
+        return 0;
+    }
+
     public static AdGainInitManager getInstance() {
         if (sInstance == null) {
             synchronized (AdGainInitManager.class) {

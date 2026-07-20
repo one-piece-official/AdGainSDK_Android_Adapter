@@ -42,7 +42,7 @@ public class SplashAdShowInCurrentActivity extends Activity {
         String placementId = getIntent().getStringExtra("placementId");
         container = findViewById(R.id.splash_ad_container);
 
-        ATSplashAd.entryAdScenario(placementId, "");
+//        ATSplashAd.entryAdScenario(placementId, "");
 
         initSplash(placementId);
 
@@ -96,6 +96,10 @@ public class SplashAdShowInCurrentActivity extends Activity {
 
             @Override
             public void onDownloadConfirm(Context context, ATAdInfo adInfo, ATNetworkConfirmInfo networkConfirmInfo) {
+
+            }
+
+            public void onSplashAdReward(ATAdInfo atAdInfo) {
 
             }
 

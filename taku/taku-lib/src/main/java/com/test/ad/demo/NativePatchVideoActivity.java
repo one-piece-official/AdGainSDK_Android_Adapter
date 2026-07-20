@@ -130,6 +130,14 @@ public class NativePatchVideoActivity extends Activity {
                 Log.i(TAG, "onDeeplinkCallback:" + adInfo.toString() + "--status:" + isSuccess);
             }
 
+            public void onAdActRewardSuccess(ATAdInfo atAdInfo) {
+
+            }
+
+            public void onAdActReward(ATAdInfo atAdInfo, int i) {
+
+            }
+
             @Override
             public void onAdImpressed(ATNativeAdView view, ATAdInfo entity) {
                 Log.i(TAG, "native ad onAdImpressed:\n" + entity.toString());

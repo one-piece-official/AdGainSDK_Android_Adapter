@@ -83,31 +83,77 @@ public class AdGainCustomerProxy extends WMCustomAdapterProxy {
                         @Override
                         public boolean canUsePhoneState() {
                             if (controller != null) {
-                                return controller.isCanUsePhoneState();
+                                try {
+                                    return (boolean) controller.getClass()
+                                            .getMethod("isCanUsePhoneState")
+                                            .invoke(controller);
+                                } catch (Throwable ignored) {
+                                }
                             }
                             return super.canUsePhoneState();
                         }
 
                         @Override
-                        public boolean canUseAndroidId() {
+                        public String getMacAddress() {
                             if (controller != null) {
-                                return controller.isCanUseAndroidId();
+                                try {
+                                    return (String) controller.getClass()
+                                            .getMethod("getMacAddress")
+                                            .invoke(controller);
+                                } catch (Throwable ignored) {
+                                }
                             }
-                            return super.canUseAndroidId();
+                            return super.getMacAddress();
+                        }
+
+                        @Override
+                        public String getImei() {
+                            if (controller != null) {
+                                try {
+                                    return (String) controller.getClass()
+                                            .getMethod("getDevImei")
+                                            .invoke(controller);
+                                } catch (Throwable ignored) {
+                                }
+                            }
+                            return super.getImei();
                         }
 
                         @Override
                         public boolean canUseWifiState() {
                             if (controller != null) {
-                                return controller.isCanUseWifiState();
+                                try {
+                                    return (boolean) controller.getClass()
+                                            .getMethod("isCanUseWifiState")
+                                            .invoke(controller);
+                                } catch (Throwable ignored) {
+                                }
                             }
-                            return super.canUsePhoneState();
+                            return super.canUseWifiState();
+                        }
+
+                        @Override
+                        public boolean canUseAndroidId() {
+                            if (controller != null) {
+                                try {
+                                    return (boolean) controller.getClass()
+                                            .getMethod("isCanUseAndroidId")
+                                            .invoke(controller);
+                                } catch (Throwable ignored) {
+                                }
+                            }
+                            return super.canUseAndroidId();
                         }
 
                         @Override
                         public String getOaid() {
                             if (controller != null) {
-                                return controller.getDevOaid();
+                                try {
+                                    return (String) controller.getClass()
+                                            .getMethod("getDevOaid")
+                                            .invoke(controller);
+                                } catch (Throwable ignored) {
+                                }
                             }
                             return super.getOaid();
                         }
@@ -121,25 +167,14 @@ public class AdGainCustomerProxy extends WMCustomAdapterProxy {
                         }
 
                         @Override
-                        public String getMacAddress() {
-                            if (controller != null) {
-                                return controller.getMacAddress();
-                            }
-                            return super.getMacAddress();
-                        }
-
-                        @Override
-                        public String getImei() {
-                            if (controller != null) {
-                                return controller.getDevImei();
-                            }
-                            return super.getImei();
-                        }
-
-                        @Override
                         public String getAndroidId() {
                             if (controller != null) {
-                                return controller.getAndroidId();
+                                try {
+                                    return (String) controller.getClass()
+                                            .getMethod("getAndroidId")
+                                            .invoke(controller);
+                                } catch (Throwable ignored) {
+                                }
                             }
                             return super.getAndroidId();
                         }

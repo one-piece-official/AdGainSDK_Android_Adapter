@@ -423,7 +423,7 @@ public class RewardVideoAdActivity extends BaseActivity implements View.OnClickL
         } else if (viewId == R.id.is_ad_ready_btn) {
             isAdReady();
         } else if (viewId == R.id.show_ad_btn) {
-            ATRewardVideoAd.entryAdScenario(mCurrentPlacementId, AdConst.SCENARIO_ID.REWARD_VIDEO_AD_SCENARIO);
+//            ATRewardVideoAd.entryAdScenario(mCurrentPlacementId, AdConst.SCENARIO_ID.REWARD_VIDEO_AD_SCENARIO);
             if (mRewardVideoAd != null && mRewardVideoAd.isAdReady()) {
                 showAd();
             } else {

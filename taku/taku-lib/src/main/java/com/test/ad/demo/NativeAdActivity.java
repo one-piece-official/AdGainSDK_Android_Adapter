@@ -231,6 +231,14 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                     printLogOnUI("onDeeplinkCallback");
                 }
 
+                public void onAdActRewardSuccess(ATAdInfo atAdInfo) {
+
+                }
+
+                public void onAdActReward(ATAdInfo atAdInfo, int i) {
+
+                }
+
                 @Override
                 public void onAdImpressed(ATNativeAdView view, ATAdInfo entity) {
                     Log.i(TAG, "native ad onAdImpressed:\n" + entity.toString());
@@ -453,7 +461,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
         } else if (viewId == R.id.is_ad_ready_btn) {
             isAdReady();
         } else if (viewId == R.id.show_ad_btn) {
-            ATNative.entryAdScenario(mCurrentPlacementId, AdConst.SCENARIO_ID.NATIVE_AD_SCENARIO);
+//            ATNative.entryAdScenario(mCurrentPlacementId, AdConst.SCENARIO_ID.NATIVE_AD_SCENARIO);
             if (isAdReady()) {
                 showAd();
             }

@@ -39,15 +39,6 @@ public final class ToBidInitializer {
                         return super.getLocation();
                     }
 
-                    @Override
-                    public boolean isCanUsePhoneState() {
-                        return super.isCanUsePhoneState();
-                    }
-
-                    @Override
-                    public String getDevImei() {
-                        return super.getDevImei();
-                    }
 
                     @Override
                     public boolean isCanUseAndroidId() {
@@ -64,6 +55,16 @@ public final class ToBidInitializer {
                         return super.getDevOaid();
                     }
 
+                  /*  @Override
+                    public boolean isCanUsePhoneState() {
+                        return super.isCanUsePhoneState();
+                    }
+
+                    @Override
+                    public String getDevImei() {
+                        return super.getDevImei();
+                    }
+
                     @Override
                     public boolean isCanUseWifiState() {
                         return super.isCanUseWifiState();
@@ -73,7 +74,7 @@ public final class ToBidInitializer {
                     public String getMacAddress() {
                         return super.getMacAddress();
                     }
-
+*/
                     @Override
                     public boolean isCanUseWriteExternal() {
                         return super.isCanUseWriteExternal();
